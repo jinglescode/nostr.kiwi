@@ -412,7 +412,7 @@ export default function NoteContent({ note }: { note: TNote }) {
   };
 
   return (
-    <div className="break-word overflow-x-clip">
+    <div className="break-word">
       {outDisplay(
         parseNoteLinks(
           parseNpubLinks(

@@ -36,49 +36,55 @@ export default function SiteNavbar() {
       <>
         {viewTabs === TabViews.foryou && (
           <>
-            <Popover className="popover-foryouview">
-              <List>
-                <ListItem
-                  title="Your Communities"
-                  onClick={() => {
-                    selectView(ForYouViews.followedCommunties);
-                    f7.popover.close(".popover-foryouview");
-                  }}
-                />
-                <ListItem
-                  title="People You Follow"
-                  onClick={() => {
-                    selectView(ForYouViews.followedUsers);
-                    f7.popover.close(".popover-foryouview");
-                  }}
-                />
-                <ListItem
-                  title="Discover Communities"
-                  onClick={() => {
-                    selectView(ForYouViews.globalCommunties);
-                    f7.popover.close(".popover-foryouview");
-                  }}
-                />
-                <ListItem
-                  title="Trending Notes"
-                  onClick={() => {
-                    selectView(ForYouViews.hot);
-                    f7.popover.close(".popover-foryouview");
-                  }}
-                />
-              </List>
-            </Popover>
+            {user ? (
+              <>
+                <Popover className="popover-foryouview">
+                  <List>
+                    <ListItem
+                      title="Your Communities"
+                      onClick={() => {
+                        selectView(ForYouViews.followedCommunties);
+                        f7.popover.close(".popover-foryouview");
+                      }}
+                    />
+                    <ListItem
+                      title="People You Follow"
+                      onClick={() => {
+                        selectView(ForYouViews.followedUsers);
+                        f7.popover.close(".popover-foryouview");
+                      }}
+                    />
+                    <ListItem
+                      title="Discover Communities"
+                      onClick={() => {
+                        selectView(ForYouViews.globalCommunties);
+                        f7.popover.close(".popover-foryouview");
+                      }}
+                    />
+                    <ListItem
+                      title="Trending Notes"
+                      onClick={() => {
+                        selectView(ForYouViews.hot);
+                        f7.popover.close(".popover-foryouview");
+                      }}
+                    />
+                  </List>
+                </Popover>
 
-            <NavTitle>
-              <Link popoverOpen=".popover-foryouview">
-                {viewForYou == ForYouViews.followedUsers && "Following"}
-                {viewForYou == ForYouViews.followedCommunties &&
-                  "Your Communities"}
-                {viewForYou == ForYouViews.globalCommunties && "Discover"}
-                {viewForYou == ForYouViews.hot && "What's Hot"}
-                <ChevronDownIcon className="w-4 h-4 ml-1" />
-              </Link>
-            </NavTitle>
+                <NavTitle>
+                  <Link popoverOpen=".popover-foryouview">
+                    {viewForYou == ForYouViews.followedUsers && "Following"}
+                    {viewForYou == ForYouViews.followedCommunties &&
+                      "Your Communities"}
+                    {viewForYou == ForYouViews.globalCommunties && "Discover"}
+                    {viewForYou == ForYouViews.hot && "What's Hot"}
+                    <ChevronDownIcon className="w-4 h-4 ml-1" />
+                  </Link>
+                </NavTitle>
+              </>
+            ) : (
+              <NavTitle>Discover</NavTitle>
+            )}
           </>
         )}
 
@@ -100,7 +106,7 @@ export default function SiteNavbar() {
   function RightNavButton() {
     return (
       <>
-        {viewTabs === TabViews.user && (
+        {viewTabs === TabViews.user && user && (
           <Button onClick={() => setAppActionSheet({ user: true })}>
             <Icon ios="f7:ellipsis_vertical" md="material:more_vert"></Icon>
           </Button>

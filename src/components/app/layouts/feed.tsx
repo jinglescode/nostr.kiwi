@@ -107,12 +107,6 @@ export default function FeedLayout({
         })}
       </div> */}
 
-      <Virtuoso
-        style={{ height: "100%" }}
-        data={displayFeed}
-        itemContent={(index, note) => rowRenderer({ index, note })}
-      />
-
       {isFetching && (
         // <Fab
         //   className="fixed left-4-safe bottom-20-safe z-20"
@@ -122,6 +116,12 @@ export default function FeedLayout({
           <Preloader />
         </Block>
       )}
+      
+      <Virtuoso
+        style={{ height: "100%" }}
+        data={displayFeed}
+        itemContent={(index, note) => rowRenderer({ index, note })}
+      />
 
       {/* todo, there is 1 sec after loaded, showing "no notes" */}
       {/* {status == "success" && !isFetching && feed && feed.length === 0 && (

@@ -1,11 +1,12 @@
 import { TNote } from "@/types/Note";
-import { Block, Link } from "framework7-react";
+import { Block, Link, f7 } from "framework7-react";
 import NoteActionBar from "./NoteActionBar";
 import { useNote } from "@/libs/ndk/hooks/useNote";
 import UserHeader from "../../user/UserHeader";
 import { FeedViews } from "@/types/App";
 import { useSessionNoteStore } from "@/libs/zustand/sessionNoteStore";
 import NoteContent from "./NoteContent";
+import { useRouter } from "next/router";
 
 export default function NoteBlock({
   note,
@@ -24,6 +25,8 @@ export default function NoteBlock({
   noteApprove?: boolean;
   noteView?: FeedViews;
 }) {
+  const router = useRouter();
+
   const setNotePanel = useSessionNoteStore((state) => state.setNotePanel);
 
   const { data: note2 } = useNote(eventId);
@@ -37,7 +40,7 @@ export default function NoteBlock({
   return (
     <>
       <Block
-        className="bg-white dark:bg-[#1c1c1d] my-1 py-4"
+        className="bg-white dark:bg-[#1c1c1d] my-1 py-4 overflow-x-clip"
         // colors={
         //   noteEditorMetadata &&
         //   noteEditorMetadata.replyNote &&
