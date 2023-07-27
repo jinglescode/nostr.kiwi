@@ -8,6 +8,7 @@ import ForYouPage from "@/components/for-you/page";
 import { usePersistUIStore } from "@/libs/zustand/persistUIStore";
 import { TabViews } from "@/types/App";
 import UserPage from "@/components/user/page";
+import SearchPage from "@/components/search";
 
 export default function AppLayout() {
   const viewTabs = usePersistUIStore((state) => state.viewTabs);
@@ -38,6 +39,15 @@ export default function AppLayout() {
         >
           <CommunitiesPage />
         </Tab>
+
+        <Tab
+          id="tab-search"
+          className="page-content"
+          tabActive={viewTabs === TabViews.search}
+        >
+          <SearchPage />
+        </Tab>
+
         <Tab
           id="tab-user"
           className="page-content"

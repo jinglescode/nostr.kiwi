@@ -1,20 +1,15 @@
 import {
-  Badge,
-  Block,
   Button,
   Card,
   CardFooter,
   List,
-  ListInput,
   ListItem,
   Toggle,
   f7,
 } from "framework7-react";
 import SettingsZap from "./zap";
-import { useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import SettingsRelay from "./relay";
-// import SettingsNav from "./nav";
 import SettingsReaction from "./reaction";
 import { useSessionStore } from "@/libs/zustand/session";
 import { usePersistSettingsStore } from "@/libs/zustand/persistSettingsStore";

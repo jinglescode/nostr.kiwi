@@ -100,6 +100,9 @@ export default function SiteNavbar() {
         {viewTabs === TabViews.user && (
           <NavTitle title={userProfile?.displayName}></NavTitle>
         )}
+        {viewTabs === TabViews.search && (
+          <NavTitle title='Search'></NavTitle>
+        )}
       </>
     );
   }
@@ -132,40 +135,6 @@ export default function SiteNavbar() {
         <RightNavButton />
       </NavRight>
 
-      {/* {viewTabs === TabViews.user && (
-        <Subnavbar>
-          <Segmented strong>
-            <Button
-              smallMd
-              active={viewUsers == UsersViews.feed}
-              onClick={() => setViewUsers(UsersViews.feed)}
-            >
-              <Icon f7="doc_append" />
-            </Button>
-            <Button
-              smallMd
-              active={viewUsers == UsersViews.lists}
-              onClick={() => setViewUsers(UsersViews.lists)}
-            >
-              <Icon f7="list_dash" />
-            </Button>
-            <Button
-              smallMd
-              active={viewUsers == UsersViews.communities}
-              onClick={() => setViewUsers(UsersViews.communities)}
-            >
-              <Icon f7="person_3" md="group" />
-            </Button>
-            <Button
-              smallMd
-              active={viewUsers == UsersViews.info}
-              onClick={() => setViewUsers(UsersViews.info)}
-            >
-              <Icon f7="person" md="person" />
-            </Button>
-          </Segmented>
-        </Subnavbar>
-      )} */}
     </Navbar>
   );
 }

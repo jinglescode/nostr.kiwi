@@ -7,8 +7,7 @@ export default function InputSearch({
   placeholder,
   label,
   info,
-  onKeyUp,
-  // onKeyDown,
+  onInput,
   onValueClear,
 }: {
   value: string;
@@ -17,8 +16,7 @@ export default function InputSearch({
   label: string;
   type?: string;
   info?: string;
-  onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  // onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onInput?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onValueClear?: () => void;
 }) {
   return (
@@ -30,7 +28,7 @@ export default function InputSearch({
         type="text"
         placeholder={placeholder}
         onChange={onChange}
-        onInput={onKeyUp}
+        onInput={onInput}
         value={value}
         info={info}
         clearButton={onValueClear !== undefined}
