@@ -7,14 +7,17 @@ import {
   ActionsButton,
   ActionsGroup,
   ActionsLabel,
+  BlockTitle,
   Button,
   Card,
+  Icon,
   List,
   ListInput,
   ListItem,
   Range,
+  f7,
 } from "framework7-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function SettingsZap() {
   const defaultZap = usePersistSettingsStore((state) => state.defaultZap);
@@ -70,41 +73,74 @@ export default function SettingsZap() {
       });
     }
   }
+  const pickerDevice = useRef(null);
+
+  useEffect(() => {
+    //@ts-ignore
+    pickerDevice.current = f7.picker.create({
+      inputEl: "#demo-picker-device",
+      cols: [
+        {
+          textAlign: "center",
+          values: [
+            "Wallets",
+            "Alby Nostr Wallet Connect",
+            "Custom Nostr Wallet Connect",
+          ],
+        },
+      ],
+      on: {
+        closed: function (e) {
+          //@ts-ignore
+          selectedOption(e.displayValue[0] as ELightningNode);
+        },
+      },
+    });
+  }, []);
 
   return (
     <>
       <Card outline title="Zap" headerDivider>
-        <List>
-          <h2 className="">Preferred Lightning wallet</h2>
-
+        <BlockTitle>Preferred Lightning wallet</BlockTitle>
+        <List outlineIos strongIos>
           <ListInput
+            type="text"
+            placeholder="Preferred Lightning wallet"
+            readonly
+            inputId="demo-picker-device"
             value={lightningMode}
-            // onClick={() => setOpenOptions(true)}
-            disabled={true}
-          ></ListInput>
-
-          <h2 className="mt-8">Default Zap amount</h2>
-
-          <ListItem
-            // innerClassName="flex space-x-4"
-            // innerChildren={
-            //   <>
-            //     <span>Default amount</span>
-            //     <Range
-            //       value={zapAmountSlider}
-            //       step={1}
-            //       min={0}
-            //       max={100}
-            //       //@ts-ignore
-            //       onChange={(e) => slideZapAmount(e.target.value)}
-            //     />
-            //     <span>{`${defaultZap} sats`}</span>
-            //   </>
-            // }
+            onChange={(e) => {
+              console.log(e);
+            }}
           />
+        </List>
 
-          <h2 className="mt-8">Popup Zap amounts</h2>
-          <ListInput
+        <BlockTitle className="display-flex justify-content-space-between">
+          Default zap amount
+        </BlockTitle>
+        <List simpleList outlineIos strongIos>
+          <ListItem>
+            <div>
+              <Icon ios="f7:bolt_circle" />
+            </div>
+            <div style={{ width: "100%", margin: "0 16px" }}>
+              <Range
+                min={1}
+                max={500}
+                step={10}
+                value={1}
+                label={true}
+                color="orange"
+              />
+            </div>
+            <div>
+              <Icon ios="f7:bolt_circle_fill" />
+            </div>
+          </ListItem>
+        </List>
+
+
+        {/* <ListInput
             label="Add Zap amount"
             placeholder="e.g. 42"
             value={inputAmount}
@@ -113,9 +149,9 @@ export default function SettingsZap() {
               setInputAmount(e.target.value);
             }}
             // onKeyUp={handleKeyUp}
-          />
+          /> */}
 
-          {zapAmounts.map((amount, i) => {
+        {/* {zapAmounts.map((amount, i) => {
             return (
               <ListItem
                 key={amount}
@@ -129,13 +165,12 @@ export default function SettingsZap() {
                 // }
               />
             );
-          })}
-        </List>
+          })} */}
       </Card>
 
-      <Actions
+      {/* <Actions
         opened={openOptions}
-        // onBackdropClick={() => setOpenOptions(false)}
+        onActionsClosed={() => setOpenOptions(false)}
       >
         <ActionsGroup>
           <ActionsLabel>Select preferred Lightning wallet</ActionsLabel>
@@ -151,7 +186,7 @@ export default function SettingsZap() {
             Custom Nostr Wallet Connect
           </ActionsButton>
         </ActionsGroup>
-      </Actions>
+      </Actions> */}
     </>
   );
 }

@@ -1,11 +1,14 @@
 import {
   Badge,
+  Block,
   Button,
   Card,
+  CardFooter,
   List,
   ListInput,
   ListItem,
   Toggle,
+  f7,
 } from "framework7-react";
 import SettingsZap from "./zap";
 import { useState } from "react";
@@ -21,7 +24,7 @@ export default function SettingsPage() {
     <>
       <LookAndFeel />
       <SettingsZap />
-      <SettingsReaction />
+      {/* <SettingsReaction /> */}
       {/* <SettingsNav /> */}
       <SpamFilters />
       <SettingsRelay />
@@ -52,14 +55,18 @@ function CommunityShowAllNotesToggle() {
   return (
     <>
       {isClientActive && (
-        <ListItem title="Show all notes">
-          <span slot="after">
-            <Toggle
-              checked={communityShowAllNotes}
-              onChange={() => setCommunityShowAllNotes(!communityShowAllNotes)}
-            />
-          </span>
-        </ListItem>
+        <List>
+          <ListItem title="Show all notes">
+            <span slot="after">
+              <Toggle
+                checked={communityShowAllNotes}
+                onChange={() =>
+                  setCommunityShowAllNotes(!communityShowAllNotes)
+                }
+              />
+            </span>
+          </ListItem>
+        </List>
       )}
     </>
   );
@@ -75,11 +82,13 @@ function DarkToggle() {
   return (
     <>
       {isClientActive && (
-        <ListItem title="Dark mode">
-          <span slot="after">
-            <Toggle checked={darkMode} onChange={() => toggleDarkMode()} />
-          </span>
-        </ListItem>
+        <List>
+          <ListItem title="Dark mode">
+            <span slot="after">
+              <Toggle checked={darkMode} onChange={() => toggleDarkMode()} />
+            </span>
+          </ListItem>
+        </List>
       )}
     </>
   );
@@ -90,19 +99,6 @@ function SpamFilters() {
   const setSpamFilters = usePersistSettingsStore(
     (state) => state.setSpamFilters
   );
-  const [input, setInput] = useState<string>("");
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    let _search = e.target.value.toLowerCase();
-    setInput(_search);
-  }
-
-  function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" || e.keyCode === 13) {
-      setSpamFilters([...spamFilters, input]);
-      setInput("");
-    }
-  }
 
   function removeFilter(text: string) {
     var index = spamFilters.indexOf(text);
@@ -112,22 +108,15 @@ function SpamFilters() {
     setSpamFilters([...spamFilters]);
   }
 
+  function promptNewSpam() {
+    f7.dialog.prompt("Filter this word", "Add Spam Filter", (word) => {
+      setSpamFilters([...spamFilters, word]);
+    });
+  }
+
   return (
-    <Card
-      outline
-      title="Spam Filters"
-      footer="Filters are applied to all replies."
-      headerDivider
-      footerDivider
-    >
-      <List>
-        <ListInput
-          label="New keywords"
-          placeholder="e.g. free money"
-          onChange={handleChange}
-          // onKeyUp={handleKeyUp}
-          value={input}
-        />
+    <Card outline title="Spam Filters" headerDivider footerDivider>
+      <List simpleList>
         {spamFilters.map((text, i) => {
           return (
             <ListItem key={i} title={text}>
@@ -140,6 +129,10 @@ function SpamFilters() {
           );
         })}
       </List>
+      <Button fill onClick={() => promptNewSpam()}>
+        New Spam Filter
+      </Button>
+      <CardFooter>Filters are applied to all replies.</CardFooter>
     </Card>
   );
 }

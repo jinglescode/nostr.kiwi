@@ -2,7 +2,16 @@ import { useNDK } from "@/libs/ndk";
 import { usePersistSettingsStore } from "@/libs/zustand/persistSettingsStore";
 import { useSessionStore } from "@/libs/zustand/session";
 import { TrashIcon } from "@heroicons/react/24/solid";
-import { Badge, Button, Card, List, ListInput, ListItem } from "framework7-react";
+import {
+  Badge,
+  Button,
+  Card,
+  CardFooter,
+  List,
+  ListInput,
+  ListItem,
+  f7,
+} from "framework7-react";
 import { useState } from "react";
 
 export default function SettingsRelay() {
@@ -34,51 +43,45 @@ export default function SettingsRelay() {
 
   if (ndk === undefined) return <></>;
 
-  return (
-    <Card
-      outline
-      title="Relays"
-      footer="Add/remove relays takes effect after restarting."
-      headerDivider
-      footerDivider
-    >
-      <List>
-        <ListInput
-          label="Add another relay"
-          placeholder="e.g. wss://relay.example.com"
-          value={inputRelay}
-          onChange={(e) => {
-            //@ts-ignore
-            setInputRelay(e.target.value);
-          }}
-          // onKeyUp={handleKeyUp}
-        />
+  function promptNewRelay() {
+    f7.dialog.prompt(
+      "Enter relay address e.g. wss://relay.example.com",
+      "Add Relay",
+      (inputRelay) => {
+        let updatedRelaySet = [...relays];
+        updatedRelaySet.push(inputRelay);
+        setRelays(updatedRelaySet);
+        setToastMessage(`${inputRelay} added.`);
+      }
+    );
+  }
 
+  return (
+    <Card outline title="Relays" headerDivider footerDivider>
+      <List>
         {relays.map((relay, key) => {
           const thisRelay = ndk.pool.relays.get(relay);
-
           return (
-            <ListItem
-              key={relay}
-              title={relay}
-              // media={
-              //   <Badge
-              //     colors={{
-              //       bg: thisRelay?.status === 1 ? "bg-green-500" : "bg-red-500",
-              //     }}
-              //   ></Badge>
-              // }
-              // after={
-              //   <>
-              //     <Button onClick={() => removeRelay(relay)}>
-              //       <TrashIcon className="w-4 h-4" />
-              //     </Button>
-              //   </>
-              // }
-            />
+            <ListItem key={relay} title={relay}>
+              <span slot="after">
+                <Button onClick={() => removeRelay(relay)}>
+                  <TrashIcon className="w-4 h-4" />
+                </Button>
+              </span>
+              <span slot="media">
+                <Badge
+                  color={thisRelay?.status === 1 ? "green" : "red"}
+                ></Badge>
+              </span>
+            </ListItem>
           );
         })}
       </List>
+
+      <Button fill onClick={() => promptNewRelay()}>
+        New Relay
+      </Button>
+      <CardFooter>Add/remove relays takes effect after restarting.</CardFooter>
     </Card>
   );
 }
