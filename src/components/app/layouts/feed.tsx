@@ -4,7 +4,7 @@ import { FeedViews } from "@/types/App";
 import { useEffect, useState } from "react";
 import { useSessionStore } from "@/libs/zustand/session";
 import NoteBlock from "@/components/note/NoteBlock";
-import { Block, Preloader } from "framework7-react";
+import { Block, Preloader, Page } from "framework7-react";
 import ArticleCard from "@/components/article/ArticleCard";
 import { Virtuoso } from "react-virtuoso";
 
@@ -86,8 +86,8 @@ export default function FeedLayout({
   }
 
   return (
-    // <Page ptr ptrMousewheel={true} onPtrRefresh={ptrRerefresh}>
-    <>
+    <Page ptr onPtrRefresh={ptrRerefresh}>
+      {/* <> */}
       {/* <div>
         {displayFeed.map((note, i) => {
           if (note.kind == 30023) {
@@ -127,6 +127,6 @@ export default function FeedLayout({
       {/* {status == "success" && !isFetching && feed && feed.length === 0 && (
         <Block className="text-center">No Notes.</Block>
       )} */}
-    </>
+    </Page>
   );
 }
