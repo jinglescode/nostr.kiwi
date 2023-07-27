@@ -3,7 +3,7 @@ import { useNotePost } from "@/libs/ndk/hooks/useNotePost";
 import { useSessionStore } from "@/libs/zustand/session";
 import { useSessionNoteStore } from "@/libs/zustand/sessionNoteStore";
 import { TImageUpload } from "@/types/Note";
-import { Block, TextEditor, Button } from "framework7-react";
+import { Block, TextEditor, Button, ListInput, List } from "framework7-react";
 import { useEffect, useRef, useState } from "react";
 import { nip19 } from "nostr-tools";
 import { NDKEvent } from "@nostr-dev-kit/ndk";
@@ -208,13 +208,33 @@ export default function NoteEditor() {
 
   return (
     <>
-      <TextEditor
+      {/* <TextEditor
         placeholder="what do you want to say?"
         resizable
         buttons={[]}
         value={inputNoteBody}
         onTextEditorChange={(value) => setInputNoteBody(value)}
-      />
+      /> */}
+
+      <div className="w-full dark:border-gray-600 p-4">
+        <textarea
+          rows={4}
+          className="w-full px-0 text-sm text-gray-900 dark:text-white dark:placeholder-gray-400 border-2 border-gray-200 rounded-lg"
+          placeholder="what do you want to say?"
+          value={inputNoteBody}
+          onChange={(e) => setInputNoteBody(e.target.value)}
+        ></textarea>
+      </div>
+      {/* <List>
+        <ListInput
+          placeholder="what do you want to say?"
+          resizable
+          value={inputNoteBody}
+          onChange={(e) => setInputNoteBody(e.target.value)}
+          outline
+          size={20}
+        />
+      </List> */}
       <Block>
         <Button fill onClick={() => postNote()}>
           POST

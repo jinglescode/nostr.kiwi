@@ -19,6 +19,8 @@ import {
 } from "framework7-react";
 import { useState } from "react";
 import UserName from "../user/UserName";
+import { NDKEvent } from "@nostr-dev-kit/ndk";
+import { useCommunityChatPost } from "@/libs/ndk/hooks/useCommunityChatPost";
 
 type Message = {
   type: "sent" | "received";
@@ -36,6 +38,12 @@ export default function Chat({ community }: { community: TCommunity }) {
   const user = usePersistUserStore((state) => state.user);
 
   const { data: chat } = useCommunityChat(community.id);
+
+  const {
+    mutate: mutateCommunityChat,
+    isSuccess: isSuccessCommunityChat,
+    isError: isErrorCommunityChat,
+  } = useCommunityChatPost();
 
   const messagesData: Message[] = chat
     ? chat.map((message) => {
@@ -84,21 +92,17 @@ export default function Chat({ community }: { community: TCommunity }) {
   };
 
   async function sendMessage() {
-    // const messagesToSend: Message[] = [];
+    console.log(22, community);
+    if (community) {
+      const note = new NDKEvent();
+      note.content = messageText;
+      note.tags = [];
+      note.kind = 42;
+      note.tags.push(["a", community.id, "", "root"]);
 
-    // const text = messageText.replace(/\n/g, "<br>").trim();
-
-    // if (text.length) {
-    //   messagesToSend.push({
-    //     type: "sent",
-    //     text: text,
-    //   });
-    // }
-    // if (messagesToSend.length === 0) {
-    //   return;
-    // }
-
-    // setMessagesData([...messagesData, ...messagesToSend]);
+      console.log(33, note);
+      mutateCommunityChat(note);
+    }
     setMessageText("");
   }
 

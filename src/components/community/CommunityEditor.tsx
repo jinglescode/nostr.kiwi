@@ -8,19 +8,20 @@ import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 import { getPublicKeys } from "@/libs/ndk/utils/getPublicKeys";
 import UserHeader from "../user/UserHeader";
 import { useCommunityPost } from "@/libs/ndk/hooks/useCommunityPost";
-import { useRouter } from "next/router";
 import { useUserCommunitiesModerator } from "@/libs/ndk/hooks/useUserCommunitiesModerator";
 import Input from "../common/form/Input";
 
 export default function CommunityEditor() {
   const setToastMessage = useSessionStore((state) => state.setToastMessage);
   const user = usePersistUserStore((state) => state.user);
+  const appPopup = useSessionStore((state) => state.appPopup);
   const setAppPopup = useSessionStore((state) => state.setAppPopup);
 
   const { signer } = useNDK();
 
-  const router = useRouter();
-  let communityId = router.query.id;
+  const composeCommunity = appPopup?.composeCommunity;
+  let communityData = composeCommunity?.community;
+  console.log(33, communityData)
 
   const { data: userCommunitiesModerator } = useUserCommunitiesModerator(
     user?.pk
@@ -36,7 +37,7 @@ export default function CommunityEditor() {
   const [tag, setTag] = useState<string>("");
   const [listTags, setListTags] = useState<string[]>([]);
 
-  const { data: communityData } = useCommunity(communityId as string);
+  // const { data: communityData } = useCommunity(communityId as string);
   const { mutate: mutateCommunity, isSuccess, isError } = useCommunityPost();
 
   let editingCommunityInfo = false;
@@ -44,7 +45,7 @@ export default function CommunityEditor() {
     editingCommunityInfo = userCommunitiesModerator.some(
       (communityModerator) => {
         return (
-          communityModerator.id === communityData.id &&
+          communityModerator.id === communityData!.id &&
           communityModerator.author === user?.pk
         );
       }
@@ -52,6 +53,7 @@ export default function CommunityEditor() {
   }
 
   useEffect(() => {
+    console.log(11, communityData);
     if (editingCommunityInfo && communityData) {
       setInputName(communityData.name);
       if (communityData.description)
