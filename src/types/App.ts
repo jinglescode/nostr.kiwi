@@ -72,6 +72,13 @@ export enum TabViews {
   user,
 }
 
+export enum UsersViews {
+  feed,
+  lists,
+  communities,
+  info,
+}
+
 export enum ForYouViews {
   followedUsers,
   followedCommunties,

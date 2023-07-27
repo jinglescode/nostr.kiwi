@@ -2,7 +2,7 @@ import { useUserProfile } from "@/libs/ndk/hooks/useUserProfile";
 import { usePersistUIStore } from "@/libs/zustand/persistUIStore";
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 import { useSessionStore } from "@/libs/zustand/session";
-import { ForYouViews, TabViews } from "@/types/App";
+import { ForYouViews, TabViews, UsersViews } from "@/types/App";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import {
   Navbar,
@@ -16,6 +16,8 @@ import {
   Button,
   Icon,
   f7,
+  Subnavbar,
+  Segmented,
 } from "framework7-react";
 
 export default function SiteNavbar() {
@@ -23,6 +25,9 @@ export default function SiteNavbar() {
   const user = usePersistUserStore((state) => state.user);
   const { data: userProfile } = useUserProfile(user?.pk);
   const setAppActionSheet = useSessionStore((state) => state.setAppActionSheet);
+
+  const viewUsers = usePersistUIStore((state) => state.viewUsers);
+  const setViewUsers = usePersistUIStore((state) => state.setViewUsers);
 
   function Title() {
     const viewForYou = usePersistUIStore((state) => state.viewForYou);
@@ -127,13 +132,38 @@ export default function SiteNavbar() {
         <RightNavButton />
       </NavRight>
 
-      {/* {viewTabs === TabViews.communities && (
-        <Subnavbar inner={false}>
-          <Searchbar
-            searchContainer=".virtual-list"
-            searchItem="li"
-            searchIn=".item-title"
-          />
+      {/* {viewTabs === TabViews.user && (
+        <Subnavbar>
+          <Segmented strong>
+            <Button
+              smallMd
+              active={viewUsers == UsersViews.feed}
+              onClick={() => setViewUsers(UsersViews.feed)}
+            >
+              <Icon f7="doc_append" />
+            </Button>
+            <Button
+              smallMd
+              active={viewUsers == UsersViews.lists}
+              onClick={() => setViewUsers(UsersViews.lists)}
+            >
+              <Icon f7="list_dash" />
+            </Button>
+            <Button
+              smallMd
+              active={viewUsers == UsersViews.communities}
+              onClick={() => setViewUsers(UsersViews.communities)}
+            >
+              <Icon f7="person_3" md="group" />
+            </Button>
+            <Button
+              smallMd
+              active={viewUsers == UsersViews.info}
+              onClick={() => setViewUsers(UsersViews.info)}
+            >
+              <Icon f7="person" md="person" />
+            </Button>
+          </Segmented>
         </Subnavbar>
       )} */}
     </Navbar>

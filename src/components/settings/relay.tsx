@@ -19,7 +19,6 @@ export default function SettingsRelay() {
   const relays = usePersistSettingsStore((state) => state.relays);
   const setRelays = usePersistSettingsStore((state) => state.setRelays);
   const setToastMessage = useSessionStore((state) => state.setToastMessage);
-  const [inputRelay, setInputRelay] = useState<string>("");
 
   function removeRelay(relayName: string) {
     let updatedRelaySet = [...relays];
@@ -29,16 +28,6 @@ export default function SettingsRelay() {
     }
     setRelays(updatedRelaySet);
     setToastMessage(`${relayName} removed.`);
-  }
-
-  function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" || e.keyCode === 13) {
-      let updatedRelaySet = [...relays];
-      updatedRelaySet.push(inputRelay);
-      setRelays(updatedRelaySet);
-      setToastMessage(`${inputRelay} added.`);
-      setInputRelay("");
-    }
   }
 
   if (ndk === undefined) return <></>;

@@ -1,4 +1,4 @@
-import { ForYouViews, TabViews } from "@/types/App";
+import { ForYouViews, TabViews, UsersViews } from "@/types/App";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -8,6 +8,9 @@ interface PersistState {
 
   viewTabs: TabViews;
   setViewTabs: (view: TabViews) => void;
+
+  viewUsers: UsersViews;
+  setViewUsers: (view: UsersViews) => void;
 }
 
 export const usePersistUIStore = create<PersistState>()(
@@ -18,6 +21,9 @@ export const usePersistUIStore = create<PersistState>()(
 
       viewTabs: TabViews.foryou,
       setViewTabs: (view: TabViews) => set({ viewTabs: view }),
+
+      viewUsers: UsersViews.feed,
+      setViewUsers: (view: UsersViews) => set({ viewUsers: view }),
     }),
     {
       name: "kiwi-ui",
