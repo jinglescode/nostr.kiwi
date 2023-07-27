@@ -9,6 +9,7 @@ import AppActionSheet from "../AppActionSheet";
 import AppToast from "../AppToast";
 import AppPopup from "../AppPopup";
 import NotePopup from "@/components/note/NotePopup";
+import AppDialog from "../AppDialog";
 
 export default function AppInit({
   children,
@@ -72,6 +73,7 @@ export default function AppInit({
                     <AppActionSheet />
                     <AppToast />
                     <AppPopup />
+                    <AppDialog />
                   </>
                 )}
               </>

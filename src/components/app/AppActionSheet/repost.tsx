@@ -1,11 +1,12 @@
 import { useNDK } from "@/libs/ndk";
-import { useUserCommunitiesFollowed } from "@/libs/ndk/hooks/useUserCommunitiesFollowed";
-import { useUserCommunitiesModerator } from "@/libs/ndk/hooks/useUserCommunitiesModerator";
-import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 import { useSessionStore } from "@/libs/zustand/session";
 import { useSessionNoteStore } from "@/libs/zustand/sessionNoteStore";
 import { NDKFilter } from "@nostr-dev-kit/ndk";
-import { ActionsButton, ActionsGroup, ActionsLabel } from "framework7-react";
+import {
+  ActionsButton,
+  ActionsGroup,
+  ActionsLabel,
+} from "framework7-react";
 
 export default function AppActionsRepost() {
   const { signer, signPublishEvent, fetchEvents } = useNDK();

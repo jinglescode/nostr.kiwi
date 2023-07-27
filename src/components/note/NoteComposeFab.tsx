@@ -9,8 +9,7 @@ export default function NoteComposeFab({
 }: {
   community?: TCommunity;
 }) {
-  // const { signer } = useNDK();
-  const signer = true;
+  const { signer } = useNDK();
 
   const setAppPopup = useSessionStore((state) => state.setAppPopup);
   const setNoteEditorMetadata = useSessionNoteStore(
@@ -21,7 +20,7 @@ export default function NoteComposeFab({
     <>
       {signer && (
         <Fab
-          className="fixed"
+          className="fixed mb-16"
           position="right-bottom"
           slot="fixed"
           onClick={() => {

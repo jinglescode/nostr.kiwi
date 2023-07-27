@@ -90,10 +90,10 @@ export default function CommunitiesPage() {
             slot="media"
             className="rounded-lg	w-20 h-16 object-cover"
             src={
-              community.image ? community.image : "/images/logo/rounded-512.png"
+              community.image ? community.image : "/images/icons/users.svg"
             }
             onError={(e: any) => {
-              e.target.src = "/images/logo/squared-512.png";
+              e.target.src = "/images/icons/users.svg";
             }}
           />
 

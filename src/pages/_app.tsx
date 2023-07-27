@@ -28,8 +28,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </AppInit>
       )}
-
-      {/* {router.asPath == "/app" ? <AppInit /> : <Component {...pageProps} />} */}
     </>
   );
 }

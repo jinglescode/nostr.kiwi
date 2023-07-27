@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-// import { Logo } from '@/components/Logo'
 import { Container } from './Container'
 
 export function Header() {
