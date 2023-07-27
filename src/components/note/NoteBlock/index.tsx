@@ -61,7 +61,7 @@ export default function NoteBlock({
         {canReply ? (
           <NoteContent note={note} />
         ) : (
-          <Link href={`/note/${note.id}`}>
+          <Link href={`/note/${note.id}`} view="current">
             <NoteContent note={note} />
             {/* <ContentParser note={note} /> */}
           </Link>

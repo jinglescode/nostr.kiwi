@@ -45,21 +45,21 @@ export default function AppInit({
               }}
               darkMode={true}
               touch={{ tapHold: true }}
-              theme='ios'
+              theme="ios"
             >
               <View
                 main
-                browserHistory
-                browserHistorySeparator=""
-                browserHistoryInitialMatch={true}
-                browserHistoryStoreHistory={false}
+                // browserHistory
+                // browserHistorySeparator=""
+                // browserHistoryInitialMatch={true}
+                // browserHistoryStoreHistory={false}
                 url="/for-you"
               >
                 {children}
-                <AppActionSheet />
-                <AppToast />
-                <AppPopup />
               </View>
+              <AppActionSheet />
+              <AppToast />
+              <AppPopup />
             </App>
           )}
         </>

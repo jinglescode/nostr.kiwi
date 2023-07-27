@@ -42,8 +42,10 @@ export default function FeedLayout({
   function showLatestFeed() {
     if (feed && feed.length > 0) {
       if (displayFeed.length == 0) {
+        console.log(66)
         setDisplayFeed(feed as TNote[] | TArticle[]);
       } else if (feed[0].id != displayFeed[0].id) {
+        console.log(66)
         setDisplayFeed(feed as TNote[] | TArticle[]);
       }
     }
@@ -116,7 +118,7 @@ export default function FeedLayout({
           <Preloader />
         </Block>
       )}
-      
+
       <Virtuoso
         style={{ height: "100%" }}
         data={displayFeed}

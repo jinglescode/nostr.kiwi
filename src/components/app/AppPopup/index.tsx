@@ -32,7 +32,6 @@ export default function AppPopup() {
   return (
     <Popup
       push
-      className="demo-popup-push"
       opened={appPopup !== undefined}
       onPopupClosed={() => setAppPopup(undefined)}
     >
