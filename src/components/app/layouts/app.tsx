@@ -23,9 +23,6 @@ export default function AppLayout() {
 
   return (
     <Page pageContent={false}>
-      <SiteNavbar />
-      <SiteToolbar />
-
       <Tabs routable>
         <Tab
           id="tab-foryou"
@@ -49,6 +46,9 @@ export default function AppLayout() {
           <UserPage />
         </Tab>
       </Tabs>
+
+      <SiteNavbar />
+      <SiteToolbar />
     </Page>
   );
 }

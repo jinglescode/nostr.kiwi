@@ -31,6 +31,8 @@ type Message = {
 
 export default function Chat({ community }: { community: TCommunity }) {
   const { signer } = useNDK();
+  const [messageText, setMessageText] = useState("");
+
   const user = usePersistUserStore((state) => state.user);
 
   const { data: chat } = useCommunityChat(community.id);
@@ -45,87 +47,10 @@ export default function Chat({ community }: { community: TCommunity }) {
       })
     : [];
 
-  // const [messagesData, setMessagesData] = useState<Message[]>([
-  //   {
-  //     type: "sent",
-  //     text: "Hi, Kate",
-  //   },
-  //   {
-  //     type: "sent",
-  //     text: "How are you?",
-  //   },
-  //   {
-  //     name: "Kate",
-  //     type: "received",
-  //     text: "Hi, I am good!",
-  //     avatar: "https://cdn.framework7.io/placeholder/people-100x100-9.jpg",
-  //   },
-  //   {
-  //     name: "Blue Ninja",
-  //     type: "received",
-  //     text: "Hi there, I am also fine, thanks! And how are you?",
-  //     avatar: "https://cdn.framework7.io/placeholder/people-100x100-7.jpg",
-  //   },
-  //   {
-  //     type: "sent",
-  //     text: "Hey, Blue Ninja! Glad to see you ;)",
-  //   },
-  //   {
-  //     type: "sent",
-  //     text: "Hey, look, cutest kitten ever!",
-  //   },
-  //   {
-  //     type: "sent",
-  //     image: "https://cdn.framework7.io/placeholder/cats-200x260-4.jpg",
-  //   },
-  //   {
-  //     name: "Kate",
-  //     type: "received",
-  //     text: "Nice!",
-  //     avatar: "https://cdn.framework7.io/placeholder/people-100x100-9.jpg",
-  //   },
-  //   {
-  //     name: "Kate",
-  //     type: "received",
-  //     text: "Like it very much!",
-  //     avatar: "https://cdn.framework7.io/placeholder/people-100x100-9.jpg",
-  //   },
-  //   {
-  //     name: "Blue Ninja",
-  //     type: "received",
-  //     text: "Awesome!",
-  //     avatar: "https://cdn.framework7.io/placeholder/people-100x100-7.jpg",
-  //   },
-  //   {
-  //     type: "sent",
-  //     image: "https://cdn.framework7.io/placeholder/cats-200x260-4.jpg",
-  //   },
-  //   {
-  //     name: "Kate",
-  //     type: "received",
-  //     text: "Nice!",
-  //     avatar: "https://cdn.framework7.io/placeholder/people-100x100-9.jpg",
-  //   },
-  //   {
-  //     name: "Kate",
-  //     type: "received",
-  //     text: "Like it very much!",
-  //     avatar: "https://cdn.framework7.io/placeholder/people-100x100-9.jpg",
-  //   },
-  //   {
-  //     name: "Blue Ninja",
-  //     type: "received",
-  //     text: "Awesome!",
-  //     avatar: "https://cdn.framework7.io/placeholder/people-100x100-7.jpg",
-  //   },
-  // ]);
-
-  const [messageText, setMessageText] = useState("");
-
   const isFirstMessage = (message: Message, index: number) => {
     const previousMessage = messagesData[index - 1];
-    if(message.name == user?.pk) return false;
-    
+    if (message.name == user?.pk) return false;
+
     if (message.isTitle) return false;
     if (
       !previousMessage ||
@@ -180,9 +105,9 @@ export default function Chat({ community }: { community: TCommunity }) {
   return (
     <Page>
       <Messages>
-        <MessagesTitle>
+        {/* <MessagesTitle>
           <b>Sunday, Feb 9,</b> 12:58
-        </MessagesTitle>
+        </MessagesTitle> */}
 
         {messagesData.map((message, index) => (
           <Message
@@ -208,6 +133,7 @@ export default function Chat({ community }: { community: TCommunity }) {
       </Messages>
 
       <Messagebar
+        className="pb-4"
         placeholder="your message"
         // attachmentsVisible={attachmentsVisible()}
         // sheetVisible={sheetVisible}

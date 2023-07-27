@@ -42,10 +42,8 @@ export default function FeedLayout({
   function showLatestFeed() {
     if (feed && feed.length > 0) {
       if (displayFeed.length == 0) {
-        console.log(66)
         setDisplayFeed(feed as TNote[] | TArticle[]);
       } else if (feed[0].id != displayFeed[0].id) {
-        console.log(66)
         setDisplayFeed(feed as TNote[] | TArticle[]);
       }
     }
@@ -109,7 +107,7 @@ export default function FeedLayout({
         })}
       </div> */}
 
-      {isFetching && (
+      {isFetching && displayFeed.length == 0 && (
         // <Fab
         //   className="fixed left-4-safe bottom-20-safe z-20"
         //   icon={<ArrowPathIcon className="w-7 h-7 animate-spin" />}

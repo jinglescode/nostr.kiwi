@@ -5,7 +5,7 @@ export default function NoteEditor() {
     <TextEditor
       placeholder="what do you want to say?"
       resizable
-      buttons={["bold", "italic", "underline", "strikeThrough"]}
+      buttons={[]}
     />
   );
 }

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { App, View } from "framework7-react";
+import { App, View, f7ready } from "framework7-react";
 
 import { routes } from "../routes";
 import Providers from "./providers";
 import AppActionSheet from "../AppActionSheet";
 import AppToast from "../AppToast";
-import NoteComposeFab from "@/components/note/NoteComposeFab";
 import AppPopup from "../AppPopup";
+import NotePopup from "@/components/note/NotePopup";
 
 export default function AppInit({
   children,
@@ -19,12 +19,19 @@ export default function AppInit({
   const url = `${process.env.NEXT_PUBLIC_HOST}${router.asPath}`;
 
   const [clientActive, setClientActive] = useState(false);
+  const [isF7ready, setIsF7ready] = useState(false);
 
   useEffect(() => {
     async function load() {
       setClientActive(true);
     }
     load();
+  }, []);
+
+  useEffect(() => {
+    f7ready((f7) => {
+      setIsF7ready(true);
+    });
   }, []);
 
   return (
@@ -47,19 +54,27 @@ export default function AppInit({
               touch={{ tapHold: true }}
               theme="ios"
             >
-              <View
-                main
-                // browserHistory
-                // browserHistorySeparator=""
-                // browserHistoryInitialMatch={true}
-                // browserHistoryStoreHistory={false}
-                url="/for-you"
-              >
-                {children}
-              </View>
-              <AppActionSheet />
-              <AppToast />
-              <AppPopup />
+              <>
+                {isF7ready && (
+                  <>
+                    <View
+                      main
+                      // browserHistory
+                      // browserHistorySeparator=""
+                      // browserHistoryInitialMatch={true}
+                      // browserHistoryStoreHistory={false}
+                      // url="/for-you"
+                    >
+                      {children}
+                      {/* <AppLayout /> */}
+                    </View>
+                    <NotePopup />
+                    <AppActionSheet />
+                    <AppToast />
+                    <AppPopup />
+                  </>
+                )}
+              </>
             </App>
           )}
         </>

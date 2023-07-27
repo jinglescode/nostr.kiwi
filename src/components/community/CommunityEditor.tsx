@@ -142,7 +142,6 @@ export default function CommunityEditor() {
     // }
 
     const response = mutateCommunity(newCommunity); // noresponse?
-    console.log(123, response);
 
     // const success = await signPublishEvent(newCommunityEvent);
 
@@ -261,10 +260,7 @@ export default function CommunityEditor() {
         <List inset>
           {listTags.map((tag, i) => {
             return (
-              <ListItem
-                title={tag}
-                key={i}
-              >
+              <ListItem title={tag} key={i}>
                 <Button small={true} onClick={() => removeTag(tag)}>
                   remove
                 </Button>

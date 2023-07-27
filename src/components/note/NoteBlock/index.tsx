@@ -7,6 +7,7 @@ import { FeedViews } from "@/types/App";
 import { useSessionNoteStore } from "@/libs/zustand/sessionNoteStore";
 import NoteContent from "./NoteContent";
 import { useRouter } from "next/router";
+import { useSessionStore } from "@/libs/zustand/session";
 
 export default function NoteBlock({
   note,
@@ -61,7 +62,12 @@ export default function NoteBlock({
         {canReply ? (
           <NoteContent note={note} />
         ) : (
-          <Link href={`/note/${note.id}`} view="current">
+          // <Link href={`/note/${note.id}`}>
+          <Link
+            onClick={() => {
+              setNotePanel({ note: note });
+            }}
+          >
             <NoteContent note={note} />
             {/* <ContentParser note={note} /> */}
           </Link>
