@@ -13,6 +13,7 @@ import { UsersViews } from "@/types/App";
 import UserFeed from "../user/UserFeed";
 import UserImage from "../user/UserImage";
 import { TUser } from "@/types/User";
+import ListsPage from "../list/ListPage";
 
 export default function UsersPage({ pk }: { pk: string }) {
   const { data: user } = useUserProfile(pk);
@@ -21,7 +22,7 @@ export default function UsersPage({ pk }: { pk: string }) {
   const setViewUsers = usePersistUIStore((state) => state.setViewUsers);
 
   return (
-    <Page>
+    <div className="h-full flex flex-col">
       <div className="grid grid-cols-4 grid-gap p-1 m-2">
         <Button
           active={viewUsers == UsersViews.feed}
@@ -51,10 +52,9 @@ export default function UsersPage({ pk }: { pk: string }) {
 
       {viewUsers === UsersViews.feed && <UserFeed npubOrPk={pk} />}
       {viewUsers === UsersViews.info && user && <UserInfo user={user} />}
-
-      {viewUsers === UsersViews.lists && <Block>coming soon</Block>}
+      {viewUsers === UsersViews.lists && <ListsPage pk={pk} />}
       {viewUsers === UsersViews.communities && <Block>coming soon</Block>}
-    </Page>
+    </div>
   );
 }
 

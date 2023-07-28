@@ -189,14 +189,14 @@ export default function NoteEditor() {
     }
   }
 
-  function handleChange(event: any) {
-    setInputNoteBody(event.target.value);
-    //@ts-ignore
-    const height = event.target.scrollHeight;
-    if (height < 300) {
-      setNoteEditorHeight(height);
-    }
-  }
+  // function handleChange(event: any) {
+  //   setInputNoteBody(event.target.value);
+  //   //@ts-ignore
+  //   const height = event.target.scrollHeight;
+  //   if (height < 300) {
+  //     setNoteEditorHeight(height);
+  //   }
+  // }
 
   // function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
   //   if (e.key === "Enter" || e.keyCode === 13) {
@@ -237,7 +237,7 @@ export default function NoteEditor() {
       </List> */}
       <Block>
         <Button fill onClick={() => postNote()}>
-          POST
+          POST{community && " TO " + community.name}
         </Button>
       </Block>
     </>

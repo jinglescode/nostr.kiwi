@@ -8,7 +8,6 @@ import Providers from "./providers";
 import AppActionSheet from "../AppActionSheet";
 import AppToast from "../AppToast";
 import AppPopup from "../AppPopup";
-import NotePopup from "@/components/note/NotePopup";
 import AppDialog from "../AppDialog";
 
 export default function AppInit({
@@ -69,7 +68,6 @@ export default function AppInit({
                       {children}
                       {/* <AppLayout /> */}
                     </View>
-                    <NotePopup />
                     <AppActionSheet />
                     <AppToast />
                     <AppPopup />

@@ -4,9 +4,7 @@ import NoteActionBar from "./NoteActionBar";
 import { useNote } from "@/libs/ndk/hooks/useNote";
 import UserHeader from "../../user/UserHeader";
 import { FeedViews } from "@/types/App";
-import { useSessionNoteStore } from "@/libs/zustand/sessionNoteStore";
 import NoteContent from "./NoteContent";
-import { useRouter } from "next/router";
 import { useSessionStore } from "@/libs/zustand/session";
 
 export default function NoteBlock({
@@ -26,9 +24,7 @@ export default function NoteBlock({
   noteApprove?: boolean;
   noteView?: FeedViews;
 }) {
-  const router = useRouter();
-
-  const setNotePanel = useSessionNoteStore((state) => state.setNotePanel);
+  const setAppPopup = useSessionStore((state) => state.setAppPopup);
 
   const { data: note2 } = useNote(eventId);
 
@@ -39,48 +35,43 @@ export default function NoteBlock({
   if (note === undefined) return <></>;
 
   return (
-    <>
-      <Block
-        className="bg-white dark:bg-[#1c1c1d] my-1 py-4 overflow-x-clip"
-        // colors={
-        //   noteEditorMetadata &&
-        //   noteEditorMetadata.replyNote &&
-        //   noteEditorMetadata.replyNote.id === _note.id
-        //     ? {
-        //         strongBgIos: "bg-[#262230]",
-        //         strongBgMaterial: "bg-[#262230]",
-        //       }
-        //     : {}
-        // }
-      >
-        <UserHeader
-          note={note}
-          noteView={noteView}
-          rightOptions={rightOptions}
-        />
+    <Block
+      className="bg-white dark:bg-[#1c1c1d] my-1 py-4 overflow-x-clip w-full"
+      // colors={
+      //   noteEditorMetadata &&
+      //   noteEditorMetadata.replyNote &&
+      //   noteEditorMetadata.replyNote.id === _note.id
+      //     ? {
+      //         strongBgIos: "bg-[#262230]",
+      //         strongBgMaterial: "bg-[#262230]",
+      //       }
+      //     : {}
+      // }
+    >
+      <UserHeader note={note} noteView={noteView} rightOptions={rightOptions} />
 
-        {canReply ? (
+      {canReply ? (
+        <NoteContent note={note} />
+      ) : (
+        // <Link href={`/note/${note.id}`}>
+        <Link
+          className="w-full"
+          onClick={() => {
+            setAppPopup({ note: note });
+          }}
+        >
           <NoteContent note={note} />
-        ) : (
-          // <Link href={`/note/${note.id}`}>
-          <Link
-            onClick={() => {
-              setNotePanel({ note: note });
-            }}
-          >
-            <NoteContent note={note} />
-            {/* <ContentParser note={note} /> */}
-          </Link>
-        )}
+          {/* <ContentParser note={note} /> */}
+        </Link>
+      )}
 
-        {!hideActionBar && (
-          <NoteActionBar
-            note={note}
-            noteApprove={noteApprove}
-            canReply={canReply}
-          />
-        )}
-      </Block>
-    </>
+      {!hideActionBar && (
+        <NoteActionBar
+          note={note}
+          noteApprove={noteApprove}
+          canReply={canReply}
+        />
+      )}
+    </Block>
   );
 }

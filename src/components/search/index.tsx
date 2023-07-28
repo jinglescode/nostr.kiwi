@@ -1,4 +1,13 @@
-import { Button, Page, Icon, Block, ListItem } from "framework7-react";
+import {
+  Button,
+  Page,
+  Icon,
+  Block,
+  ListItem,
+  List,
+  Link,
+  Preloader,
+} from "framework7-react";
 import InputSearch from "../common/form/InputSearch";
 import { useEffect, useRef, useState } from "react";
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
@@ -21,7 +30,7 @@ let timeout: any;
 
 type SearchResult = {
   type: "user" | "community" | "hashtag" | "note";
-  id?: string;
+  id: string;
   community?: TCommunity;
 };
 
@@ -39,6 +48,7 @@ export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [view, setView] = useState<View>(View.users);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // search bar
   function debounce(callback: Function, delay: number) {
@@ -68,9 +78,9 @@ export default function SearchPage() {
           </div>
         )}
         {result.type == "community" && (
-          <div className="px-4">
+          <Link href={`/communities/${result.community?.id}/`} className="px-4">
             <CommunityCard style={5} community={result.community!} />
-          </div>
+          </Link>
         )}
         {result.type == "note" && <NoteBlock eventId={result.id} />}
         {/* {result.type == "hashtag" && <Tag tag={result.id!} />} */}
@@ -81,8 +91,6 @@ export default function SearchPage() {
   // user search
   const user = usePersistUserStore((state) => state.user);
   const { data: followings } = useUserFollowings(user ? user.pk : undefined);
-
-  const [loading, setLoading] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
 
@@ -125,7 +133,7 @@ export default function SearchPage() {
         .forEach((user) => {
           searchResults.current = [
             ...searchResults.current,
-            { type: "user", id: user?.pk },
+            { type: "user", id: user?.pk! },
           ];
         });
     }
@@ -139,7 +147,7 @@ export default function SearchPage() {
       communities.forEach((community) => {
         searchResults.current = [
           ...searchResults.current,
-          { type: "community", community: community },
+          { type: "community", id: community.id, community: community },
         ];
       });
     }
@@ -194,7 +202,9 @@ export default function SearchPage() {
     setLoading(true);
 
     console.log(44, "searching", searchTerm);
+
     if (searchTerm.length === 0) return;
+
     setLoading(true);
 
     // users
@@ -219,6 +229,10 @@ export default function SearchPage() {
     //   await searchHashtags();
     // }
 
+    searchResults.current = searchResults.current.filter(
+      (value, index, self) => index === self.findIndex((t) => t.id === value.id)
+    );
+
     setResults(searchResults.current);
     setLoading(false);
   }
@@ -234,10 +248,8 @@ export default function SearchPage() {
     }
   }, [searchTerm, view]);
 
-  console.log(44, "results", results);
-
   return (
-    <Page>
+    <>
       <div className="h-full flex flex-col">
         <div>
           <InputSearch
@@ -291,6 +303,12 @@ export default function SearchPage() {
           </Button> */}
         </div>
 
+        {loading && (
+          <Block className="text-center">
+            <Preloader />
+          </Block>
+        )}
+
         <Virtuoso
           className="mb-20 overflow-x-hidden"
           style={{ height: "100%" }}
@@ -298,7 +316,7 @@ export default function SearchPage() {
           itemContent={(index, note) => rowRenderer({ index, result: note })}
         />
       </div>
-    </Page>
+    </>
   );
 }
 

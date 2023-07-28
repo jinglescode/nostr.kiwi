@@ -2,6 +2,7 @@ import { NDKTag } from "@nostr-dev-kit/ndk";
 import { TArticle } from "./Article";
 import { TCommunity } from "./Community";
 import { TNote } from "./Note";
+import { TTagList, TUserList } from "./List";
 
 export type TAppDialog = {
   reaction?: {
@@ -37,6 +38,7 @@ export type TPopup = {
   settings?: boolean;
   userList?: string;
   tagList?: string;
+  listFeed?: TUserList | TTagList;
 };
 
 export type TActionSheet = {

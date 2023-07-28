@@ -86,8 +86,8 @@ export default function FeedLayout({
   }
 
   return (
-    <Page ptr onPtrRefresh={ptrRerefresh}>
-      {/* <> */}
+    // <Page ptr onPtrRefresh={ptrRerefresh}>
+    <>
       {/* <div>
         {displayFeed.map((note, i) => {
           if (note.kind == 30023) {
@@ -127,6 +127,7 @@ export default function FeedLayout({
       {/* {status == "success" && !isFetching && feed && feed.length === 0 && (
         <Block className="text-center">No Notes.</Block>
       )} */}
-    </Page>
+      
+    </>
   );
 }

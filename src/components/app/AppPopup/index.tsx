@@ -8,6 +8,8 @@ import ArticlePopup from "./article";
 import SettingsPopup from "./settings";
 import UserListPopup from "./userList";
 import TagListPopup from "./tagList";
+import NotePage from "@/components/note/NotePage/page";
+import ListFeedPopup from "./listFeed";
 
 export default function AppPopup() {
   const appPopup = useSessionStore((state) => state.appPopup);
@@ -27,11 +29,13 @@ export default function AppPopup() {
   if (appPopup?.community) title = "Community Info";
   if (appPopup?.article) title = "Article";
   if (appPopup?.settings) title = "Settings";
-  if (appPopup?.userList) title = "User List";
+  if (appPopup?.userList) title = "Users List";
+  if (appPopup?.tagList) title = "Tags List";
+  if (appPopup?.listFeed) title = `List: ${appPopup.listFeed.id}`;
 
   return (
     <Popup
-      push
+      push={appPopup?.composeNote ? true : false}
       opened={appPopup !== undefined}
       onPopupClosed={() => setAppPopup(undefined)}
     >
@@ -47,7 +51,7 @@ export default function AppPopup() {
 
           {appPopup && (
             <>
-              {/* {appPopup.note && <NotePopup />} */}
+              {appPopup.note && <NotePage note={appPopup.note} />}
               {appPopup.composeNote && <ComposeNotePopup />}
               {appPopup && (
                 <>{appPopup.composeCommunity && <ComposeCommunityPopup />}</>
@@ -55,8 +59,9 @@ export default function AppPopup() {
               {appPopup.community && <CommunityPopup />}
               {/* {appPopup.article && <ArticlePopup />} */}
               {appPopup.settings && <SettingsPopup />}
-              {/*{appPopup.userList && <UserListPopup />}
-            {appPopup.tagList && <TagListPopup />} */}
+              {appPopup.userList && <UserListPopup />}
+              {appPopup.tagList && <TagListPopup />}
+              {appPopup.listFeed && <ListFeedPopup />}
             </>
           )}
         </Page>

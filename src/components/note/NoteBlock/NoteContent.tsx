@@ -412,7 +412,7 @@ export default function NoteContent({ note }: { note: TNote }) {
   };
 
   return (
-    <div className="break-word">
+    <div className="break-word w-full">
       {outDisplay(
         parseNoteLinks(
           parseNpubLinks(
