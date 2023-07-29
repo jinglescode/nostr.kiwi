@@ -12,15 +12,13 @@ import CommunityContent from "./CommunityContent";
 import { useCommunity } from "@/libs/ndk/hooks/useCommunity";
 import CommunityImage from "./CommunityImage";
 import { useSessionStore } from "@/libs/zustand/session";
-import { useNDK } from "@/libs/ndk";
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 import { usePersistSettingsStore } from "@/libs/zustand/persistSettingsStore";
 import { useUserCommunitiesModerator } from "@/libs/ndk/hooks/useUserCommunitiesModerator";
 import { useFeedCommunityArticles } from "@/libs/ndk/hooks/useFeedCommunityArticles";
+import CommunityFollowButton from "./CommunityFollowButton";
 
 export default function CommunityPage({ id }: { id: string }) {
-  const { signer } = useNDK();
-
   const { data: community } = useCommunity(id);
 
   const user = usePersistUserStore((state) => state.user);
@@ -68,6 +66,7 @@ export default function CommunityPage({ id }: { id: string }) {
         </NavTitle>
 
         <NavRight>
+          <CommunityFollowButton community={community} />
           <Button
             onClick={() => setAppActionSheet({ communityId: community?.id })}
           >

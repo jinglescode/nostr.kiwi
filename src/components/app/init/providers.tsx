@@ -15,8 +15,6 @@ import { useSessionStore } from "@/libs/zustand/session";
 import { usePersistSettingsStore } from "@/libs/zustand/persistSettingsStore";
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 
-import { f7 } from "framework7-react";
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

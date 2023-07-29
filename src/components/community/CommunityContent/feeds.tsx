@@ -1,5 +1,4 @@
 // import CommunityFollowButton from "@/components/ui/community/CommunityFollowButton";
-// import NoteComposeFab from "@/components/ui/note/NoteComposeFab";
 import FeedLayout from "@/components/app/layouts/feed";
 import { useNDK } from "@/libs/ndk";
 import { useFeedCommunity } from "@/libs/ndk/hooks/useFeedCommunity";

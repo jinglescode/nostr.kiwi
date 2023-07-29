@@ -1,4 +1,4 @@
-import { Tabs, Page, f7, Tab } from "framework7-react";
+import { Tabs, Page, f7, Tab, Views, View } from "framework7-react";
 import { useEffect } from "react";
 import SiteNavbar from "../navbar";
 import SiteToolbar from "../toolbar";

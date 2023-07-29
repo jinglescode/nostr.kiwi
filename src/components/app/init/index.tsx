@@ -36,49 +36,47 @@ export default function AppInit({
 
   return (
     <>
-      <Providers>
-        <>
-          {clientActive && (
-            <App
-              routes={routes}
-              url={url}
-              colors={{
-                primary: "#7E81FF",
-                "brand-2": "#635EC0",
-                "brand-3": "#262230",
-                "brand-4": "#141119",
-                white: "#ffffff",
-                black: "#000000",
-              }}
-              darkMode={true}
-              touch={{ tapHold: true }}
-              theme="ios"
-            >
-              <>
-                {isF7ready && (
-                  <>
-                    <View
-                      main
-                      // browserHistory
-                      // browserHistorySeparator=""
-                      // browserHistoryInitialMatch={true}
-                      // browserHistoryStoreHistory={false}
-                      // url="/for-you"
-                    >
-                      {children}
-                      {/* <AppLayout /> */}
-                    </View>
-                    <AppActionSheet />
-                    <AppToast />
-                    <AppPopup />
-                    <AppDialog />
-                  </>
-                )}
-              </>
-            </App>
-          )}
-        </>
-      </Providers>
+      {clientActive && (
+        <App
+          routes={routes}
+          url={url}
+          colors={{
+            primary: "#7E81FF",
+            "brand-2": "#635EC0",
+            "brand-3": "#262230",
+            "brand-4": "#141119",
+            white: "#ffffff",
+            black: "#000000",
+          }}
+          darkMode={true}
+          touch={{ tapHold: true }}
+          theme="ios"
+        >
+          <>
+            {isF7ready && (
+              <Providers>
+                <>
+                  <View
+                    main
+                    // browserHistory
+                    // browserHistorySeparator=""
+                    // browserHistoryInitialMatch={true}
+                    // browserHistoryStoreHistory={false}
+                    // url="/for-you"
+                  >
+                    {children}
+                  </View>
+
+                  <AppActionSheet />
+                  <AppToast />
+                  <AppPopup />
+                  <AppDialog />
+                </>
+              </Providers>
+            )}
+          </>
+        </App>
+      )}
     </>
   );
 }

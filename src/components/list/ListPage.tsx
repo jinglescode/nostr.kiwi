@@ -2,7 +2,6 @@ import { useUserListTags } from "@/libs/ndk/hooks/useUserListTags";
 import { useUserListUsers } from "@/libs/ndk/hooks/useUserListUsers";
 import { TTagList, TUserList } from "@/types/List";
 import { Icon, List, ListItem } from "framework7-react";
-import { useCallback } from "react";
 import UserName from "../user/UserName";
 import { useSessionStore } from "@/libs/zustand/session";
 

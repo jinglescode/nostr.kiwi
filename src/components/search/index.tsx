@@ -18,7 +18,7 @@ import { nostaddress } from "@/libs/api.nostrcheck.me/nostaddress";
 import { getPublicKeys } from "@/libs/ndk/utils/getPublicKeys";
 import { Virtuoso } from "react-virtuoso";
 import UserHeader from "../user/UserHeader";
-import useCommuntiesList from "../community/CommuntiesList";
+import useCommuntiesList from "../community/useCommuntiesList";
 import CommunityCard from "../community/CommunityCard";
 import { TCommunity } from "@/types/Community";
 import { nip19 } from "nostr-tools";
@@ -140,7 +140,10 @@ export default function SearchPage() {
   }
 
   // communities
-  const communities = useCommuntiesList({ inputSearch: searchTerm });
+  const communities = useCommuntiesList({
+    inputSearch: searchTerm,
+    pk: user?.pk,
+  });
 
   async function checkCommuntiesList() {
     if (communities) {

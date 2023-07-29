@@ -8,7 +8,8 @@ import NDK, {
 import { PropsWithChildren, createContext, useContext } from "react";
 import NDKInstance from "./instance";
 import { _loginWithNip07, _loginWithNip46, _loginWithSecret } from "./signers";
-import { Block, Preloader } from "framework7-react";
+import { Block, Preloader, Page } from "framework7-react";
+import Loader from "@/components/common/loader";
 
 interface NDKContext {
   ndk: NDK;
@@ -122,13 +123,7 @@ const NDKProvider = ({
       </NDKContext.Provider>
     );
   } else {
-    return (
-      <>
-        <Block className="text-center">
-          <Preloader />
-        </Block>
-      </>
-    );
+    return <Loader label="Connecting to relays..." />;
   }
 };
 

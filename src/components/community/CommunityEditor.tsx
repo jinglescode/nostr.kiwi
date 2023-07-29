@@ -21,7 +21,6 @@ export default function CommunityEditor() {
 
   const composeCommunity = appPopup?.composeCommunity;
   let communityData = composeCommunity?.community;
-  console.log(33, communityData)
 
   const { data: userCommunitiesModerator } = useUserCommunitiesModerator(
     user?.pk

@@ -1,5 +1,6 @@
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 import "framework7/css/bundle";
 import "framework7-icons/css/framework7-icons.css";
@@ -12,7 +13,10 @@ import Framework7React from "framework7-react";
 Framework7.use(Framework7React);
 
 import HeadMeta from "@/components/site/headmeta";
-import AppInit from "@/components/app/init";
+// import AppInit from "@/components/app/init";
+const DynamicAppInit = dynamic(() => import("@/components/app/init"), {
+  ssr: false,
+});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -24,9 +28,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       {router.asPath == "/" ? (
         <Component {...pageProps} />
       ) : (
-        <AppInit>
+        <DynamicAppInit>
           <Component {...pageProps} />
-        </AppInit>
+        </DynamicAppInit>
       )}
     </>
   );

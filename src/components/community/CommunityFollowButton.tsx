@@ -39,10 +39,8 @@ export default function CommunityFollowButton({
   }
 
   return (
-    <div>
-      <Button fill round onClick={() => update()} className="text-xs">
-        {userCommunities?.includes(community.id) ? "Joined" : "Join"}
-      </Button>
-    </div>
+    <Button fill round onClick={() => update()} className="text-xs">
+      {userCommunities?.includes(community.id) ? "Joined" : "Join"}
+    </Button>
   );
 }

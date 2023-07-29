@@ -14,6 +14,7 @@ import UserFeed from "../user/UserFeed";
 import UserImage from "../user/UserImage";
 import { TUser } from "@/types/User";
 import ListsPage from "../list/ListPage";
+import UserCommunities from "../user/UserCommunities";
 
 export default function UsersPage({ pk }: { pk: string }) {
   const { data: user } = useUserProfile(pk);
@@ -31,16 +32,16 @@ export default function UsersPage({ pk }: { pk: string }) {
           <Icon f7="doc_append" md="article" />
         </Button>
         <Button
-          active={viewUsers == UsersViews.lists}
-          onClick={() => setViewUsers(UsersViews.lists)}
-        >
-          <Icon f7="list_dash" md="list" />
-        </Button>
-        <Button
           active={viewUsers == UsersViews.communities}
           onClick={() => setViewUsers(UsersViews.communities)}
         >
           <Icon f7="person_3" md="group" />
+        </Button>
+        <Button
+          active={viewUsers == UsersViews.lists}
+          onClick={() => setViewUsers(UsersViews.lists)}
+        >
+          <Icon f7="list_dash" md="list" />
         </Button>
         <Button
           active={viewUsers == UsersViews.info}
@@ -53,7 +54,7 @@ export default function UsersPage({ pk }: { pk: string }) {
       {viewUsers === UsersViews.feed && <UserFeed npubOrPk={pk} />}
       {viewUsers === UsersViews.info && user && <UserInfo user={user} />}
       {viewUsers === UsersViews.lists && <ListsPage pk={pk} />}
-      {viewUsers === UsersViews.communities && <Block>coming soon</Block>}
+      {viewUsers === UsersViews.communities && <UserCommunities pk={pk} />}
     </div>
   );
 }
