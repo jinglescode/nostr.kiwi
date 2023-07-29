@@ -61,6 +61,42 @@ export default function HeadMeta() {
       <link rel="apple-touch-startup-image" href="/splash/kiwi-3001x2823.png" />
 
       <link
+        href="/splash/kiwi-3001x2823.png"
+        sizes="2048x2732"
+        rel="apple-touch-startup-image"
+      />
+      <link
+        href="/splash/kiwi-3001x2823.png"
+        sizes="1668x2224"
+        rel="apple-touch-startup-image"
+      />
+      <link
+        href="/splash/kiwi-3001x2823.png"
+        sizes="1536x2048"
+        rel="apple-touch-startup-image"
+      />
+      <link
+        href="/splash/kiwi-3001x2823.png"
+        sizes="1125x2436"
+        rel="apple-touch-startup-image"
+      />
+      <link
+        href="/splash/kiwi-3001x2823.png"
+        sizes="1242x2208"
+        rel="apple-touch-startup-image"
+      />
+      <link
+        href="/splash/kiwi-3001x2823.png"
+        sizes="750x1334"
+        rel="apple-touch-startup-image"
+      />
+      <link
+        href="/splash/kiwi-3001x2823.png"
+        sizes="640x1136"
+        rel="apple-touch-startup-image"
+      />
+
+      {/* <link
         rel="apple-touch-startup-image"
         href="/splash/kiwi-3001x2823.png"
         media="orientation: portrait"
@@ -165,7 +201,7 @@ export default function HeadMeta() {
         rel="apple-touch-startup-image"
         media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
         href="/splash/kiwi-3001x2823.png"
-      />
+      /> */}
 
       <meta name="msapplication-TileColor" content="#da532c" />
     </Head>

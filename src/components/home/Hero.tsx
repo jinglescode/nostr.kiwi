@@ -50,7 +50,7 @@ export function Hero() {
             </div> */}
 
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
-              <Button href="/for-you" variant="solid">
+              <Button href="/app" variant="solid">
                 <RocketLaunchIcon className="h-6 w-6 flex-none" />
                 <span className="ml-2.5">Launch App</span>
               </Button>

@@ -1,6 +1,6 @@
 {
   "name": "nostr.kiwi",
-  "short_name": "nostr.kiwi",
+  "short_name": "Kiwi",
   "icons": [
     {
       "src": "/images/squared-vector.svg",
@@ -19,7 +19,7 @@
     }
   ],
   "id": "/",
-  "start_url": "/for-you",
+  "start_url": "/app",
   "background_color": "#000000",
   "display": "standalone",
   "scope": "/",
