@@ -53,13 +53,13 @@ export default function NoteBlock({
       {canReply ? (
         <NoteContent note={note} />
       ) : (
-        <Link href={`/note/${note.id}`}>
-        {/* <Link
+        // <Link href={`/note/${note.id}`}>
+        <Link
           className="w-full"
           onClick={() => {
             setAppPopup({ note: note });
           }}
-        > */}
+        >
           <NoteContent note={note} />
           {/* <ContentParser note={note} /> */}
         </Link>
