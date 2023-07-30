@@ -4,7 +4,7 @@ import { NDKFilter } from "@nostr-dev-kit/ndk";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUserCommunitiesFollowed(pubkey: string | undefined) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery(
     ["user", pubkey, "communities", "followed"],
     async () => {
@@ -29,7 +29,7 @@ export function useUserCommunitiesFollowed(pubkey: string | undefined) {
       return ids;
     },
     {
-      enabled: !!pubkey,
+      enabled: !!pubkey && !!ndk,
       // refetchOnWindowFocus: false,
       // refetchOnMount: false,
       // refetchOnReconnect: false,

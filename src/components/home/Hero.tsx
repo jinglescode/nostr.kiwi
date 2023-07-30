@@ -97,12 +97,12 @@ export function Hero() {
                       <path
                         d="M18.5855 11.4102H20.5C21.6046 11.4102 22.5 12.3056 22.5 13.4102V22.4102C22.5 23.5147 21.6046 24.4102 20.5 24.4102H10.5C9.39543 24.4102 8.5 23.5147 8.5 22.4102V13.4102C8.5 12.3056 9.39543 11.4102 10.5 11.4102H12.2303"
                         stroke="#0381FE"
-                        stroke-linecap="round"
+                        strokeLinecap="round"
                       ></path>
                       <path
                         d="M12.6768 8.41341L15.2507 5.83944C15.3886 5.70161 15.612 5.70161 15.7499 5.83944L18.3238 8.41341M15.5003 16.8251V5.58984"
                         stroke="#0381FE"
-                        stroke-linecap="round"
+                        strokeLinecap="round"
                       ></path>
                     </svg>
                   </span>{" "}
@@ -124,8 +124,8 @@ export function Hero() {
                   <path
                     d="M17 17.9999L9.70709 25.2928C9.31657 25.6833 8.6834 25.6833 8.29288 25.2928L0.999972 17.9999M8.99997 0.999999L8.99997 26"
                     stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
                   ></path>
                 </svg>
               </div>

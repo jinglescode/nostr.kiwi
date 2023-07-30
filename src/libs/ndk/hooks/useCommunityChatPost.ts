@@ -5,10 +5,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export function useCommunityChatPost() {
   const queryClient = useQueryClient();
 
-  const { signPublishEvent } = useNDK();
+  const { ndk, signPublishEvent } = useNDK();
 
   return useMutation(
     async (event: NDKEvent) => {
+      if (!ndk) return undefined;
       const success = await signPublishEvent(event);
       if (success) return event;
       return undefined;

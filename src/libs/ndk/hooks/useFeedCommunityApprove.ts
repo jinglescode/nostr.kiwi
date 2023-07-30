@@ -1,7 +1,7 @@
 import { TNote } from "@/types/Note";
 import { useFeedCommunity } from "./useFeedCommunity";
 import { TCommunity } from "@/types/Community";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useFeedCommunityApprove(community: TCommunity | undefined) {
   const [pendingNotes, setPendingNotes] = useState<TNote[]>([]);

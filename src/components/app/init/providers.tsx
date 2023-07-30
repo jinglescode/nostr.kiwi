@@ -66,7 +66,7 @@ export default function Providers({
 }
 
 function LoadNDK() {
-  const { loginWithNip46, loginWithSecret, loginWithNip07 } = useNDK();
+  const { ndk, loginWithNip46, loginWithSecret, loginWithNip07 } = useNDK();
   const user = usePersistUserStore((state) => state.user);
   const loaded = useRef<boolean>(false);
 
@@ -85,8 +85,10 @@ function LoadNDK() {
         }
       }
     }
-    load();
-  }, []);
+    if (ndk !== undefined) {
+      load();
+    }
+  }, [ndk]);
 
   return <></>;
 }

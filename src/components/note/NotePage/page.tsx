@@ -27,7 +27,7 @@ export default function NotePage({ note, id }: { note?: TNote; id?: string }) {
 
   return (
     <Page>
-      <Navbar title="Note" backLink="Back"></Navbar>
+      {/* <Navbar title="Note" backLink="Back"></Navbar> */}
       <NoteBlock note={note} canReply={true} />
       <NoteReplies replies={data} />
     </Page>

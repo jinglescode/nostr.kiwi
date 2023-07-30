@@ -6,10 +6,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export function useUserListUsersPost() {
   const queryClient = useQueryClient();
 
-  const { signPublishEvent } = useNDK();
+  const { ndk, signPublishEvent } = useNDK();
 
   return useMutation(
     async (list: TUserList) => {
+      if (!ndk) return undefined;
+
       list.items = list.items.filter((value, index, array) => {
         return array.indexOf(value) === index;
       });

@@ -5,7 +5,7 @@ import { NDKFilter } from "@nostr-dev-kit/ndk";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUserListUsers(pubkey: string | undefined) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching } = useQuery(
     ["user", pubkey, "lists"],
     async () => {
@@ -34,7 +34,7 @@ export function useUserListUsers(pubkey: string | undefined) {
       return _lists;
     },
     {
-      enabled: !!pubkey,
+      enabled: !!pubkey && !!ndk,
       staleTime: STALETIME.info,
     }
   );

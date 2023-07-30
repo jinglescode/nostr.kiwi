@@ -7,7 +7,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useCommunity(id: string | undefined) {
   const queryClient = useQueryClient();
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching } = useQuery(
     ["communities", id],
     async () => {
@@ -28,7 +28,7 @@ export function useCommunity(id: string | undefined) {
       return community;
     },
     {
-      enabled: !!id,
+      enabled: !!id && !!ndk,
       // refetchOnWindowFocus: false,
       // refetchOnMount: false,
       // refetchOnReconnect: false,

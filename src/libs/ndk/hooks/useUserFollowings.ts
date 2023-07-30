@@ -10,7 +10,7 @@ export function useUserFollowings(npubOrPk: string | undefined) {
   if (npubOrPk && npubOrPk.includes("npub"))
     pubkey = getPublicKeys(npubOrPk).pk;
 
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery(
     ["user", pubkey, "followings"],
     async () => {
@@ -23,7 +23,7 @@ export function useUserFollowings(npubOrPk: string | undefined) {
       return pubkeys;
     },
     {
-      enabled: !!pubkey,
+      enabled: !!pubkey && !!ndk,
       // refetchOnWindowFocus: false,
       // refetchOnMount: false,
       // refetchOnReconnect: false,

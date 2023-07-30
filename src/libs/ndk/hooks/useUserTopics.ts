@@ -4,7 +4,7 @@ import { NDKFilter } from "@nostr-dev-kit/ndk";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUserTopics(pubkey: string | undefined) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching } = useQuery(
     ["user", pubkey, "topics"],
     async () => {
@@ -29,7 +29,7 @@ export function useUserTopics(pubkey: string | undefined) {
       return _tags;
     },
     {
-      enabled: !!pubkey,
+      enabled: !!pubkey && !!ndk,
       // refetchOnWindowFocus: false,
       // refetchOnMount: false,
       // refetchOnReconnect: false,

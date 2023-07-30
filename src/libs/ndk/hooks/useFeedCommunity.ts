@@ -9,9 +9,9 @@ export function useFeedCommunity(
   moderators: string[] | undefined,
   showAllNotes = false
 ) {
-  const { fetchEventsEOSE } = useNDK();
+  const { ndk, fetchEventsEOSE } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery({
-    enabled: id !== undefined && moderators !== undefined,
+    enabled: id !== undefined && moderators !== undefined && !!ndk,
     queryKey: ["feed", id, showAllNotes ? "all" : "mod"],
     queryFn: async () => {
       let filter: NDKFilter = {

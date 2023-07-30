@@ -11,7 +11,7 @@ export function useUserProfile(npubOrPk: string | undefined) {
   if (npubOrPk && npubOrPk.includes("npub"))
     pubkey = getPublicKeys(npubOrPk).pk;
 
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching } = useQuery(
     ["user", pubkey, "profile"],
     async () => {
@@ -58,7 +58,7 @@ export function useUserProfile(npubOrPk: string | undefined) {
       return user;
     },
     {
-      enabled: !!pubkey,
+      enabled: !!pubkey && !!ndk,
       // refetchOnWindowFocus: false,
       // refetchOnMount: false,
       // refetchOnReconnect: false,

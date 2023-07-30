@@ -8,7 +8,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 export function useUserCommunitiesModerator(pubkey: string | undefined) {
   const queryClient = useQueryClient();
 
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery(
     ["user", pubkey, "communities", "moderator"],
     async () => {
@@ -26,7 +26,7 @@ export function useUserCommunitiesModerator(pubkey: string | undefined) {
       return communities;
     },
     {
-      enabled: !!pubkey,
+      enabled: !!pubkey && !!ndk,
       // refetchOnWindowFocus: false,
       // refetchOnMount: false,
       // refetchOnReconnect: false,

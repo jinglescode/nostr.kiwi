@@ -4,7 +4,7 @@ import { NDKFilter } from "@nostr-dev-kit/ndk";
 import { useQuery } from "@tanstack/react-query";
 
 export function useCommunityFollowers(id: string | undefined) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery(
     ["communities", id, "followers"],
     async () => {
@@ -23,7 +23,7 @@ export function useCommunityFollowers(id: string | undefined) {
       return pubkeys;
     },
     {
-      enabled: !!id,
+      enabled: !!id && !!ndk,
       staleTime: STALETIME.info,
     }
   );

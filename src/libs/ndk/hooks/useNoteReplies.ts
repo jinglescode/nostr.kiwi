@@ -6,9 +6,9 @@ import { TNote } from "@/types/Note";
 import { STALETIME } from "@/constants/nostr";
 
 export function useNoteReplies(eventId: string | undefined) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEventsEOSE } = useNDK();
   const { status, data, error, isFetching } = useQuery({
-    enabled: eventId !== undefined,
+    enabled: eventId !== undefined && !!ndk,
     queryKey: ["note", eventId, "replies"],
     queryFn: async () => {
       const filter: NDKFilter = {
@@ -17,7 +17,7 @@ export function useNoteReplies(eventId: string | undefined) {
       };
 
       let notes = await fetchNotes({
-        fetchEvents: fetchEvents,
+        fetchEvents: fetchEventsEOSE,
         filter: filter,
       });
       console.log(9999, "useNoteReplies", notes.length);

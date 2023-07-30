@@ -5,10 +5,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export function useUserCommunitiesFollowedPost() {
   const queryClient = useQueryClient();
 
-  const { signPublishEvent } = useNDK();
+  const { ndk, signPublishEvent } = useNDK();
 
   return useMutation(
     async ({ ids, communityId }: { ids: string[]; communityId: string }) => {
+      if (!ndk) return undefined;
+
       let _tags = [];
       for (let t of ids) {
         _tags.push(["a", t]);

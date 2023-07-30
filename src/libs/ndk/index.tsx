@@ -12,7 +12,7 @@ import { Block, Preloader, Page } from "framework7-react";
 import Loader from "@/components/common/loader";
 
 interface NDKContext {
-  ndk: NDK;
+  ndk: NDK | undefined;
   signer: NDKPrivateKeySigner | NDKNip46Signer | NDKNip07Signer | undefined;
   fetchEvents: (filter: NDKFilter) => Promise<NDKEvent[]>;
   fetchEventsEOSE: (filter: NDKFilter) => Promise<NDKEvent[]>;
@@ -54,7 +54,7 @@ interface NDKContext {
 }
 
 const NDKContext = createContext<NDKContext>({
-  ndk: new NDK({}),
+  ndk: undefined,
   signer: undefined,
   fetchEvents: (_: NDKFilter) => Promise.resolve([]),
   fetchEventsEOSE: (_: NDKFilter) => Promise.resolve([]),
@@ -105,26 +105,42 @@ const NDKProvider = ({
     }
   }
 
-  if (ndk !== undefined) {
-    return (
-      <NDKContext.Provider
-        value={{
-          ndk: ndk,
-          signer,
-          fetchEvents,
-          fetchEventsEOSE,
-          loginWithNip07,
-          loginWithNip46,
-          loginWithSecret,
-          signPublishEvent,
-        }}
-      >
-        {children}
-      </NDKContext.Provider>
-    );
-  } else {
-    return <Loader label="Connecting to relays..." />;
-  }
+  // if (ndk !== undefined) {
+  //   return (
+  //     <NDKContext.Provider
+  //       value={{
+  //         ndk: ndk,
+  //         signer,
+  //         fetchEvents,
+  //         fetchEventsEOSE,
+  //         loginWithNip07,
+  //         loginWithNip46,
+  //         loginWithSecret,
+  //         signPublishEvent,
+  //       }}
+  //     >
+  //       {children}
+  //     </NDKContext.Provider>
+  //   );
+  // } else {
+  //   return <Loader label="Connecting to relays..." />;
+  // }
+  return (
+    <NDKContext.Provider
+      value={{
+        ndk: ndk,
+        signer,
+        fetchEvents,
+        fetchEventsEOSE,
+        loginWithNip07,
+        loginWithNip46,
+        loginWithSecret,
+        signPublishEvent,
+      }}
+    >
+      {children}
+    </NDKContext.Provider>
+  );
 };
 
 const useNDK = () => {
