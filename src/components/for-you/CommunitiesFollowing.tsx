@@ -5,6 +5,7 @@ import { usePersistSettingsStore } from "@/libs/zustand/persistSettingsStore";
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 import { FeedViews } from "@/types/App";
 import FeedLayout from "../app/layouts/feed";
+import { Page } from "framework7-react";
 
 export default function CommunitiesFollowing() {
   const user = usePersistUserStore((state) => state.user);
@@ -27,19 +28,26 @@ export default function CommunitiesFollowing() {
     ];
   }
 
-  const { isFetching, data, status } = useFeedCommunities({
+  const { isFetching, data, status, refetch } = useFeedCommunities({
     ids: ids,
     queryKey: "followedCommunities",
     showAllNotes: communityShowAllNotes,
   });
 
+  async function ptrRerefresh(done: Function) {
+    if (refetch) {
+      await refetch();
+    }
+    done();
+  }
+
   return (
-    <>
+    <Page ptr onPtrRefresh={ptrRerefresh}>
       <FeedLayout
         feed={data}
         isFetching={isFetching}
         noteView={FeedViews.communities}
       />
-    </>
+    </Page>
   );
 }

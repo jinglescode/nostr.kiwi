@@ -78,15 +78,7 @@ export default function FeedLayout({
     );
   }
 
-  async function ptrRerefresh(done: Function) {
-    if (refetch) {
-      await refetch();
-    }
-    done();
-  }
-
   return (
-    // <Page ptr onPtrRefresh={ptrRerefresh}>
     <>
       {/* <div>
         {displayFeed.map((note, i) => {
@@ -127,7 +119,6 @@ export default function FeedLayout({
       {/* {status == "success" && !isFetching && feed && feed.length === 0 && (
         <Block className="text-center">No Notes.</Block>
       )} */}
-      
     </>
   );
 }

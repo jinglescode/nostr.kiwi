@@ -38,6 +38,7 @@ export default function AppPopup() {
       push={appPopup?.composeNote ? true : false}
       opened={appPopup !== undefined}
       onPopupClosed={() => setAppPopup(undefined)}
+      swipeToClose
     >
       <View>
         <Page>

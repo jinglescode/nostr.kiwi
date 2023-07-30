@@ -14,7 +14,7 @@ export function useFeedCommunities({
   showAllNotes?: boolean;
 }) {
   const { ndk, fetchEventsEOSE } = useNDK();
-  const { status, data, error, isFetching } = useQuery({
+  const { status, data, error, isFetching, refetch } = useQuery({
     enabled: ids !== undefined && !!ndk,
     queryKey: ["feed", queryKey, showAllNotes ? "all" : "mod"],
     queryFn: async () => {
@@ -47,5 +47,5 @@ export function useFeedCommunities({
     staleTime: STALETIME.feed,
   });
 
-  return { status, data, error, isFetching };
+  return { status, data, error, isFetching, refetch };
 }

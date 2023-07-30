@@ -12,7 +12,7 @@ import NoteComposeFab from "../note/NoteComposeFab";
 
 export default function ForYouPage() {
   const user = usePersistUserStore((state) => state.user);
-  return <Page>{user ? <UserActive /> : <PublicNotes />}</Page>;
+  return <>{user ? <UserActive /> : <PublicNotes />}</>;
 }
 
 function UserActive() {
