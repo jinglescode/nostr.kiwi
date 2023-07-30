@@ -13,9 +13,9 @@ export function useFeedCommunities({
   queryKey: string;
   showAllNotes?: boolean;
 }) {
-  const { fetchEventsEOSE } = useNDK();
+  const { ndk, fetchEventsEOSE } = useNDK();
   const { status, data, error, isFetching } = useQuery({
-    enabled: ids !== undefined,
+    enabled: ids !== undefined && !!ndk,
     queryKey: ["feed", queryKey, showAllNotes ? "all" : "mod"],
     queryFn: async () => {
       let filter: NDKFilter = {

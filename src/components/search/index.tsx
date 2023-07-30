@@ -1,13 +1,4 @@
-import {
-  Button,
-  Page,
-  Icon,
-  Block,
-  ListItem,
-  List,
-  Link,
-  Preloader,
-} from "framework7-react";
+import { Button, Icon, Block, Link, Preloader } from "framework7-react";
 import InputSearch from "../common/form/InputSearch";
 import { useEffect, useRef, useState } from "react";
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
@@ -24,7 +15,6 @@ import { TCommunity } from "@/types/Community";
 import { nip19 } from "nostr-tools";
 import { wineSearch } from "@/libs/api.nostr.wine/wineSearch";
 import NoteBlock from "../note/NoteBlock";
-import { useUserListTags } from "@/libs/ndk/hooks/useUserListTags";
 
 let timeout: any;
 

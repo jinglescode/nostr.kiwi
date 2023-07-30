@@ -5,8 +5,9 @@ import { useNDK } from "..";
 import { STALETIME } from "@/constants/nostr";
 
 export function useFeedCommunitiesGlobal() {
-  const { fetchEventsEOSE } = useNDK();
+  const { ndk, fetchEventsEOSE } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery({
+    enabled: !!ndk,
     queryKey: ["feed", "globalCommunities"],
     queryFn: async () => {
       let filter: NDKFilter = {

@@ -5,7 +5,7 @@ import { NDKFilter } from "@nostr-dev-kit/ndk";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUserActivities(pubkey: string | undefined) {
-  const { fetchEventsEOSE } = useNDK();
+  const { ndk, fetchEventsEOSE } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery(
     ["user", pubkey, "activities"],
     async () => {
@@ -25,7 +25,7 @@ export function useUserActivities(pubkey: string | undefined) {
       return notes;
     },
     {
-      enabled: !!pubkey,
+      enabled: !!pubkey && !!ndk,
       // refetchOnWindowFocus: false,
       // refetchOnMount: false,
       // refetchOnReconnect: false,

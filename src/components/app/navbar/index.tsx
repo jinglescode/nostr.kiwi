@@ -2,7 +2,7 @@ import { useUserProfile } from "@/libs/ndk/hooks/useUserProfile";
 import { usePersistUIStore } from "@/libs/zustand/persistUIStore";
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 import { useSessionStore } from "@/libs/zustand/session";
-import { ForYouViews, TabViews, UsersViews } from "@/types/App";
+import { ForYouViews, TabViews } from "@/types/App";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import {
   Navbar,
@@ -16,8 +16,6 @@ import {
   Button,
   Icon,
   f7,
-  Subnavbar,
-  Segmented,
 } from "framework7-react";
 
 export default function SiteNavbar() {
@@ -25,9 +23,6 @@ export default function SiteNavbar() {
   const user = usePersistUserStore((state) => state.user);
   const { data: userProfile } = useUserProfile(user?.pk);
   const setAppActionSheet = useSessionStore((state) => state.setAppActionSheet);
-
-  const viewUsers = usePersistUIStore((state) => state.viewUsers);
-  const setViewUsers = usePersistUIStore((state) => state.setViewUsers);
 
   function Title() {
     const viewForYou = usePersistUIStore((state) => state.viewForYou);
@@ -100,9 +95,7 @@ export default function SiteNavbar() {
         {viewTabs === TabViews.user && (
           <NavTitle title={userProfile?.displayName}></NavTitle>
         )}
-        {viewTabs === TabViews.search && (
-          <NavTitle title='Search'></NavTitle>
-        )}
+        {viewTabs === TabViews.search && <NavTitle title="Search"></NavTitle>}
       </>
     );
   }
@@ -134,7 +127,6 @@ export default function SiteNavbar() {
       <NavRight>
         <RightNavButton />
       </NavRight>
-
     </Navbar>
   );
 }

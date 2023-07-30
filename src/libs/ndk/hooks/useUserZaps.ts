@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 // todo, need to get from 9734, where pubkey is user
 export function useUserZaps(pubkey: string | undefined) {
-  const { fetchEventsEOSE } = useNDK();
+  const { ndk, fetchEventsEOSE } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery(
     ["user", pubkey, "zaps"],
     async () => {
@@ -76,7 +76,7 @@ export function useUserZaps(pubkey: string | undefined) {
       return userZaps;
     },
     {
-      enabled: !!pubkey,
+      enabled: !!pubkey && !!ndk,
       staleTime: STALETIME.feed,
     }
   );

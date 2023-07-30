@@ -8,13 +8,16 @@ export default function HeadMeta() {
       <link rel="manifest" href="/manifest.json" />
 
       <meta name="application-name" content="nostr.kiwi" />
+
+      <meta name="mobile-web-app-capable" content="yes" />
+
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="apple-mobile-web-app-title" content="nostr.kiwi" />
+
       <meta name="apple-touch-fullscreen" content="yes" />
       <meta name="description" content="Communities for everyone" />
       <meta name="format-detection" content="telephone=no" />
-      <meta name="mobile-web-app-capable" content="yes" />
       <meta name="msapplication-TileColor" content="#2B5797" />
       <meta name="msapplication-tap-highlight" content="no" />
       <meta name="theme-color" content="#000000" />
@@ -60,6 +63,7 @@ export default function HeadMeta() {
 
       <link rel="apple-touch-startup-image" href="/splash/kiwi-3001x2823.png" />
 
+      {/* 
       <link
         href="/splash/kiwi-2048x2732.png"
         sizes="2048x2732"
@@ -94,116 +98,58 @@ export default function HeadMeta() {
         href="/splash/kiwi-640x1136.png"
         sizes="640x1136"
         rel="apple-touch-startup-image"
-      />
+      /> */}
 
-      {/* <link
-        rel="apple-touch-startup-image"
-        href="/splash/kiwi-3001x2823.png"
-        media="orientation: portrait"
-      />
-
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
-      />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-828x1792.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-1242x2688.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-1125x2436.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-1242x2208.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-750x1334.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-2048x2732.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-1668x2224.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-640x1136.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
-        href="/splash/kiwi-3001x2823.png"
+        href="/splash/kiwi-1668x2388.png"
       />
       <link
         rel="apple-touch-startup-image"
         media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-        href="/splash/kiwi-3001x2823.png"
-      /> */}
-
-      <meta name="msapplication-TileColor" content="#da532c" />
+        href="/splash/kiwi-1536x2048.png"
+      />
     </Head>
   );
 }

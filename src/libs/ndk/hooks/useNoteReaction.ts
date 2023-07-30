@@ -6,9 +6,9 @@ import { STALETIME } from "@/constants/nostr";
 
 // this gets the reactions for a note, not used
 export function useNoteReaction(eventId: string | undefined) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching } = useQuery({
-    enabled: eventId !== undefined,
+    enabled: eventId !== undefined && !!ndk,
     queryKey: ["note", eventId, "reactions"],
     queryFn: async () => {
       const filter: NDKFilter = {

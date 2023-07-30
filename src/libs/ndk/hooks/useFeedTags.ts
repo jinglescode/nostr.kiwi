@@ -9,10 +9,10 @@ export function useFeedTags(
   queryKey: string | undefined,
   isRemoveSpam: boolean = true
 ) {
-  const { fetchEventsEOSE } = useNDK();
+  const { ndk, fetchEventsEOSE } = useNDK();
 
   const { status, data, error, isFetching, refetch } = useQuery({
-    enabled: tags !== undefined,
+    enabled: tags !== undefined && queryKey !== undefined && !!ndk,
     queryKey: ["feed", "tags", queryKey],
     queryFn: async () => {
       const filter: NDKFilter = {

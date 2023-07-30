@@ -6,10 +6,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export function useFeedCommunityApprovePost() {
   const queryClient = useQueryClient();
 
-  const { signPublishEvent } = useNDK();
+  const { ndk, signPublishEvent } = useNDK();
 
   return useMutation(
     async (note: TNote) => {
+      if (!ndk) return undefined;
+
       const aTags = note.tags.filter((t) => t[0] === "a");
 
       if (aTags.length === 1) {

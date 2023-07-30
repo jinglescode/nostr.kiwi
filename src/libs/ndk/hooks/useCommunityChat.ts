@@ -4,10 +4,10 @@ import { useNDK } from "..";
 import { TMessage } from "@/types/Message";
 
 export function useCommunityChat(id: string | undefined) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
 
   const { status, data, error, isFetching } = useQuery({
-    enabled: id !== undefined,
+    enabled: id !== undefined && ndk !== undefined,
     queryKey: ["chat", id],
     queryFn: async () => {
       const filter: NDKFilter = {

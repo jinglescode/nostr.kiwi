@@ -5,9 +5,9 @@ import { useNDK } from "..";
 import { STALETIME } from "@/constants/nostr";
 
 export function useNote(eventId: string | undefined, removeReplies?: boolean) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching } = useQuery({
-    enabled: eventId !== undefined,
+    enabled: eventId !== undefined && !!ndk,
     queryKey: ["note", eventId],
     queryFn: async () => {
       const filter: NDKFilter = {

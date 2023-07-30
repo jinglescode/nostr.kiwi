@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export function useNotePost() {
   const queryClient = useQueryClient();
 
-  const { signPublishEvent } = useNDK();
+  const { ndk, signPublishEvent } = useNDK();
 
   return useMutation(
     async ({
@@ -19,6 +19,8 @@ export function useNotePost() {
       isCommunity?: string;
       isReply?: string;
     }) => {
+      if (!ndk) return undefined;
+
       const success = await signPublishEvent(event);
       if (success)
         return { event: success, isUserFollowings, isCommunity, isReply };
@@ -27,7 +29,7 @@ export function useNotePost() {
     {
       onSettled: (res) => {
         if (res) {
-          console.log(555, res)
+          console.log(555, res);
           if (res.isCommunity) {
             queryClient.invalidateQueries(["feed", res.isCommunity, "all"]);
             queryClient.invalidateQueries(["feed", res.isCommunity, "mod"]);

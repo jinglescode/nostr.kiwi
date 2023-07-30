@@ -8,9 +8,9 @@ export function useFeedAuthors(
   authors: string[] | undefined,
   queryKey: string | undefined
 ) {
-  const { fetchEventsEOSE } = useNDK();
+  const { ndk, fetchEventsEOSE } = useNDK();
   const { status, data, error, isFetching, refetch } = useQuery({
-    enabled: authors !== undefined && queryKey !== undefined,
+    enabled: authors !== undefined && queryKey !== undefined && !!ndk,
     queryKey: ["feed", queryKey],
     queryFn: async () => {
       const filter: NDKFilter = {

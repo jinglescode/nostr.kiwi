@@ -7,10 +7,12 @@ import { getPublicKeys } from "../utils/getPublicKeys";
 export function useCommunityPost() {
   const queryClient = useQueryClient();
 
-  const { signPublishEvent } = useNDK();
+  const { ndk, signPublishEvent } = useNDK();
 
   return useMutation(
     async (community: TCommunity) => {
+      if(!ndk) return undefined;
+      
       const communityEvent = new NDKEvent();
       communityEvent.kind = 34550;
 

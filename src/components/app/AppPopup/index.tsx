@@ -4,12 +4,12 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import ComposeNotePopup from "./composeNote";
 import ComposeCommunityPopup from "./composeCommunity";
 import CommunityPopup from "./community";
-import ArticlePopup from "./article";
+// import ArticlePopup from "./article";
 import SettingsPopup from "./settings";
 import UserListPopup from "./userList";
 import TagListPopup from "./tagList";
-import NotePage from "@/components/note/NotePage/page";
 import ListFeedPopup from "./listFeed";
+import NotePopup from "./note";
 
 export default function AppPopup() {
   const appPopup = useSessionStore((state) => state.appPopup);
@@ -51,7 +51,7 @@ export default function AppPopup() {
 
           {appPopup && (
             <>
-              {appPopup.note && <NotePage note={appPopup.note} />}
+              {appPopup.note && <NotePopup />}
               {appPopup.composeNote && <ComposeNotePopup />}
               {appPopup && (
                 <>{appPopup.composeCommunity && <ComposeCommunityPopup />}</>

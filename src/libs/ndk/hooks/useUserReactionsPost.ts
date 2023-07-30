@@ -7,10 +7,12 @@ export function useUserReactionsPost() {
   const queryClient = useQueryClient();
 
   const user = usePersistUserStore((state) => state.user);
-  const { signPublishEvent } = useNDK();
+  const { ndk, signPublishEvent } = useNDK();
 
   return useMutation(
     async ({ content, noteId }: { content: string; noteId: string }) => {
+      if (!ndk) return undefined;
+
       if (user === undefined) return undefined;
 
       const event = new NDKEvent();

@@ -1,14 +1,13 @@
 import { NDKFilter } from "@nostr-dev-kit/ndk";
 import { useQuery } from "@tanstack/react-query";
 import { useNDK } from "..";
-import { TReaction } from "@/types/Reaction";
 import { TUserReactions } from "@/types/User";
 import { STALETIME } from "@/constants/nostr";
 
 export function useUserReactions(npubOrPk: string | undefined) {
-  const { fetchEvents } = useNDK();
+  const { ndk, fetchEvents } = useNDK();
   const { status, data, error, isFetching } = useQuery({
-    enabled: npubOrPk !== undefined,
+    enabled: npubOrPk !== undefined && !!ndk,
     queryKey: ["user", npubOrPk, "reactions"],
     queryFn: async () => {
       const filter: NDKFilter = {
