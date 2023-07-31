@@ -15,7 +15,7 @@ export function useUserCommunitiesFollowed(pubkey: string | undefined) {
         authors: [pubkey!],
       };
       let events = Array.from(await fetchEvents(filter));
-      console.log(9999, "useUserCommunitiesFollowed", events.length);
+      console.log(9999999, "useUserCommunitiesFollowed", events.length, events);
 
       let ids = [];
       for (let e of events) {
@@ -30,11 +30,7 @@ export function useUserCommunitiesFollowed(pubkey: string | undefined) {
     },
     {
       enabled: !!pubkey && !!ndk,
-      // refetchOnWindowFocus: false,
-      // refetchOnMount: false,
-      // refetchOnReconnect: false,
-      // cacheTime: 1000 * 60 * 60 * 24 * 7,
-      staleTime: STALETIME.info,
+      // staleTime: STALETIME.info,
     }
   );
 

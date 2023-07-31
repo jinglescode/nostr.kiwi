@@ -29,14 +29,17 @@ export default function AppActionsCommunity() {
 
   const { data: community } = useCommunity(communityId);
 
-  const { refetch } = useFeedCommunity(
-    community?.id,
-    community?.moderators,
-    communityShowAllNotes
-  );
+  // const { refetch } = useFeedCommunity(
+  //   community?.id,
+  //   community?.moderators,
+  //   communityShowAllNotes
+  // );
 
   const { value, onCopy, hasCopied } = useClipboard(
-    `${SITE_URL}communities/${community?.id}`
+    `${SITE_URL}communities/${
+      community?.id &&
+      `${community.id.split(":")[2]}/${community.id.split(":")[1]}`
+    }`
   );
 
   function copy() {

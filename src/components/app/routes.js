@@ -22,6 +22,10 @@ export const routes = [
     asyncComponent: () => import("../../pages/communities/[id]/info"),
   },
   {
+    path: "/communities/:id/:userid",
+    asyncComponent: () => import("../../pages/communities/[id]/[userid]"),
+  },
+  {
     path: "/user",
     asyncComponent: () => import("../../pages/user"),
   },
