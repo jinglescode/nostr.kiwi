@@ -13,7 +13,6 @@ export default function CommunityApproveNotesPage({
     <FeedLayout
       feed={pendingNotes}
       noteApprove={true}
-      alwaysUpdated={true}
     />
   );
 }

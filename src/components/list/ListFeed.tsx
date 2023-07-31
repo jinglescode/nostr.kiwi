@@ -28,18 +28,7 @@ export default function ListFeed({ list }: { list: TUserList | TTagList }) {
 
   return (
     <>
-      <FeedLayout
-        feed={feed}
-        isFetching={fetchingAuthors || fetchingTags}
-        // status={
-        //   statusAuthors == "loading" || statusTags == "loading"
-        //     ? "loading"
-        //     : statusAuthors == "success" || statusTags == "success"
-        //     ? "success"
-        //     : "error"
-        // }
-        alwaysUpdated={true}
-      />
+      <FeedLayout feed={feed} isFetching={fetchingAuthors || fetchingTags} />
     </>
   );
 }

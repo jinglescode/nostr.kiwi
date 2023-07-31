@@ -15,7 +15,6 @@ import { TCommunity } from "@/types/Community";
 import { nip19 } from "nostr-tools";
 import { wineSearch } from "@/libs/api.nostr.wine/wineSearch";
 import NoteBlock from "../note/NoteBlock";
-import { useFeedTags } from "@/libs/ndk/hooks/useFeedTags";
 import { NDKFilter } from "@nostr-dev-kit/ndk";
 import { fetchNotes } from "@/libs/kiwi/nostr/fetchNotes";
 import { useNDK } from "@/libs/ndk";
@@ -154,18 +153,6 @@ export default function SearchPage() {
 
   // notes
 
-  const {
-    isFetching: fetchingTags,
-    data: feedTags,
-    status: statusTags,
-  } = useFeedTags(
-    searchTerm.charAt(0) == "#" && !searchTerm.includes(" ")
-      ? [searchTerm.substring(1)]
-      : undefined,
-    searchTerm.substring(1),
-    false
-  );
-
   async function searchNotes() {
     if (searchTerm.includes("note1")) {
       let eventId = nip19.decode(searchTerm).data as
@@ -204,24 +191,6 @@ export default function SearchPage() {
     }
   }
 
-  // hashtags
-  // const { data: tags } = useUserListTags(user ? user.pk : undefined);
-
-  // async function searchHashtags() {
-  //   if (tags) {
-  //     Object.keys(tags).map((listName) => {
-  //       return tags[listName].items.map((tag, i) => {
-  //         if (tag.toLowerCase().includes(searchTerm)) {
-  //           searchResults.current = [
-  //             ...searchResults.current,
-  //             { type: "hashtag", id: tag },
-  //           ];
-  //         }
-  //       });
-  //     });
-  //   }
-  // }
-
   // search
 
   async function search(searchTerm: string) {
@@ -251,11 +220,6 @@ export default function SearchPage() {
     if (view == View.notes) {
       await searchNotes();
     }
-
-    // hashtags
-    // if (view == View.hashtags) {
-    //   await searchHashtags();
-    // }
 
     searchResults.current = searchResults.current.filter(
       (value, index, self) => index === self.findIndex((t) => t.id === value.id)

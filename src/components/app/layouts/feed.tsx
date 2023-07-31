@@ -13,14 +13,12 @@ export default function FeedLayout({
   isFetching,
   noteApprove,
   noteView = FeedViews.users,
-  alwaysUpdated = false,
   refetch,
 }: {
   feed: TNote[] | undefined | TArticle[];
   isFetching?: boolean;
   noteApprove?: boolean;
   noteView?: FeedViews;
-  alwaysUpdated?: boolean;
   refetch?: Function;
 }) {
   const [displayFeed, setDisplayFeed] = useState<TNote[] | TArticle[]>([]);
@@ -48,12 +46,6 @@ export default function FeedLayout({
       }
     }
   }
-
-  useEffect(() => {
-    if (alwaysUpdated && feed) {
-      setDisplayFeed(feed as TNote[] | TArticle[]);
-    }
-  }, [alwaysUpdated, feed]);
 
   function rowRenderer({
     index,
