@@ -58,7 +58,7 @@ export default function AppInit({
               <>
                 <View
                   main
-                  iosDynamicNavbar={false}
+                  iosDynamicNavbar={true}
                   // xhrCache={false}
                   // browserHistory
                   // browserHistorySeparator=""
