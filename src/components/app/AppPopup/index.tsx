@@ -40,13 +40,15 @@ export default function AppPopup() {
   if (appPopup?.settings) title = "Settings";
   if (appPopup?.userList) title = "Users List";
   if (appPopup?.tagList) title = "Tags List";
-  if (appPopup?.listFeed) title = `List: ${appPopup.listFeed.id}`;
+  if (appPopup?.listFeed) title = `${appPopup.listFeed.id}`;
 
   useEffect(() => {
     if (appPopup === undefined) {
       f7.popup.close(".app-popup");
     }
   }, [appPopup]);
+
+  console.log('appPopup', appPopup)
 
   return (
     <Popup

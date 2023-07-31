@@ -4,6 +4,7 @@ import { useUserCommunitiesFollowed } from "@/libs/ndk/hooks/useUserCommunitiesF
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 import { TCommunity } from "@/types/Community";
 import { Button } from "framework7-react";
+import { useEffect, useState } from "react";
 
 export default function CommunityFollowButton({
   community,
@@ -12,10 +13,15 @@ export default function CommunityFollowButton({
 }) {
   const { signer } = useNDK();
   const user = usePersistUserStore((state) => state.user);
-  const { mutate } = useUserCommunitiesFollowedPost();
+  const { mutate, isSuccess, isError } = useUserCommunitiesFollowedPost();
   const { data: userCommunities } = useUserCommunitiesFollowed(user?.pk);
+  const [loading, setLoading] = useState(false);
 
-  if (signer == undefined || community === undefined) return <></>;
+  useEffect(() => {
+    if (isSuccess || isError) {
+      setLoading(false);
+    }
+  }, [isSuccess, isError]);
 
   async function update() {
     if (community === undefined) return;
@@ -35,12 +41,25 @@ export default function CommunityFollowButton({
       updatedUserCommunities.push(community.id);
     }
 
+    setLoading(true);
     mutate({ ids: updatedUserCommunities, communityId: community.id });
   }
 
+  if (signer == undefined || community === undefined) return <></>;
+
   return (
-    <Button fill round onClick={() => update()} className="text-xs">
-      {userCommunities?.includes(community.id) ? "Joined" : "Join"}
+    <Button
+      fill
+      round
+      onClick={() => update()}
+      className="text-xs"
+      disabled={loading}
+    >
+      {loading ? (
+        <>...</>
+      ) : (
+        <>{userCommunities?.includes(community.id) ? "Joined" : "Join"}</>
+      )}
     </Button>
   );
 }

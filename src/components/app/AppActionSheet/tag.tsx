@@ -6,7 +6,7 @@ export default function AppActionsTag() {
   const appActionSheet = useSessionStore((state) => state.appActionSheet);
   const setAppActionSheet = useSessionStore((state) => state.setAppActionSheet);
   const setAppDialog = useSessionStore((state) => state.setAppDialog);
-  const setTagPanel = sessionTagStore((state) => state.setTagPanel);
+  const setAppPopup = useSessionStore((state) => state.setAppPopup);
 
   const tag = appActionSheet?.tag;
 
@@ -25,7 +25,11 @@ export default function AppActionsTag() {
           </ActionsButton>
           <ActionsButton
             onClick={() => {
-              setTagPanel({ page: { id: tag } });
+              setAppPopup({ listFeed: {
+                id: tag,
+                items: [tag],
+                type: 'tag',
+              }});
               setAppActionSheet(undefined);
             }}
           >
