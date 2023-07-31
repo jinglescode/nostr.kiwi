@@ -1,6 +1,7 @@
 import Image from "@/components/common/Image";
 import { useCommunity } from "@/libs/ndk/hooks/useCommunity";
 import { sessionCommunityStore } from "@/libs/zustand/sessionCommunityStore";
+import { Link } from "framework7-react";
 
 export default function CommunityImage({
   id,
@@ -15,11 +16,12 @@ export default function CommunityImage({
   );
 
   return (
-    <div
+    <Link href={`/communities/${community?.id}`}>
+      {/* <div
       onClick={() =>
         setCommunityPanel({ page: { communityId: community?.id } })
       }
-    >
+    > */}
       <Image
         src={community && community.image ? community.image : ""}
         className={
@@ -30,6 +32,7 @@ export default function CommunityImage({
         generateAvatarWithChar={community && community.name.substring(0, 1)}
         alt="community logo"
       />
-    </div>
+      {/* </div> */}
+    </Link>
   );
 }

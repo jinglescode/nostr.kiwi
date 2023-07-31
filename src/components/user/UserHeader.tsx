@@ -98,33 +98,35 @@ function CommunityViewNameSection({
   return (
     <>
       {community && (
-        <div className="flex flex-col">
-          <p
-            className="text-sm font-medium text-gray-900 dark:text-white truncate"
-            onClick={(e) => {
-              e.stopPropagation();
-              setCommunityPanel({ page: { communityId: community.id } });
-            }}
-          >
-            {community.name}
-            {note && (
-              <span className="text-sm text-gray-500">
-                {note.created_at && ` · ${getDateTimeSince(note.created_at)}`}
-              </span>
-            )}
-          </p>
-          {user && (
+        <Link href={`/communities/${community?.id}`}>
+          <div className="flex flex-col">
             <p
-              className="truncate text-sm text-gray-500"
+              className="text-sm font-medium text-gray-900 dark:text-white truncate"
               onClick={(e) => {
                 e.stopPropagation();
-                setUserPanel({ npubOrPk: user.pk });
+                setCommunityPanel({ page: { communityId: community.id } });
               }}
             >
-              {user.displayName}
+              {community.name}
+              {note && (
+                <span className="text-sm text-gray-500">
+                  {note.created_at && ` · ${getDateTimeSince(note.created_at)}`}
+                </span>
+              )}
             </p>
-          )}
-        </div>
+            {user && (
+              <p
+                className="truncate text-sm text-gray-500"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setUserPanel({ npubOrPk: user.pk });
+                }}
+              >
+                {user.displayName}
+              </p>
+            )}
+          </div>
+        </Link>
       )}
     </>
   );
