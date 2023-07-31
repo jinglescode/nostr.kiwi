@@ -45,7 +45,6 @@ export default function AppPopup() {
     <Popup
       opened={appPopup !== undefined}
       onPopupClosed={() => setAppPopup(undefined)}
-      swipeToClose
     >
       <Page>
         <Navbar title={title}>
