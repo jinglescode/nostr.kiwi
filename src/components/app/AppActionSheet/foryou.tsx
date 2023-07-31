@@ -28,7 +28,7 @@ export default function AppActionsForyou() {
       {appActionSheet && foryou && (
         <ActionsGroup>
           <ActionsLabel>Feed</ActionsLabel>
-          <ActionsButton
+          {/* <ActionsButton
             onClick={() => {
               refetch();
               refetchuserCommunities();
@@ -37,7 +37,7 @@ export default function AppActionsForyou() {
             }}
           >
             Refetch Latest Feed
-          </ActionsButton>
+          </ActionsButton> */}
         </ActionsGroup>
       )}
     </>

@@ -1,4 +1,12 @@
-import { Popup, Page, Navbar, Link, View, NavRight } from "framework7-react";
+import {
+  Popup,
+  Page,
+  Navbar,
+  Link,
+  View,
+  NavRight,
+  f7,
+} from "framework7-react";
 import { useSessionStore } from "@/libs/zustand/session";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import ComposeNotePopup from "./composeNote";
@@ -10,6 +18,7 @@ import UserListPopup from "./userList";
 import TagListPopup from "./tagList";
 import ListFeedPopup from "./listFeed";
 import NotePopup from "./note";
+import { useEffect } from "react";
 
 export default function AppPopup() {
   const appPopup = useSessionStore((state) => state.appPopup);
@@ -33,40 +42,45 @@ export default function AppPopup() {
   if (appPopup?.tagList) title = "Tags List";
   if (appPopup?.listFeed) title = `List: ${appPopup.listFeed.id}`;
 
+  useEffect(() => {
+    if (appPopup === undefined) {
+      f7.popup.close(".app-popup");
+    }
+  }, [appPopup]);
+
   return (
     <Popup
+      className="app-popup"
       push={appPopup?.composeNote ? true : false}
       opened={appPopup !== undefined}
       onPopupClosed={() => setAppPopup(undefined)}
-      swipeToClose
+      closeByBackdropClick
     >
-      <View>
-        <Page>
-          <Navbar title={title}>
-            <NavRight>
-              <Link popupClose>
-                <XMarkIcon className="w-8 h-8" />
-              </Link>
-            </NavRight>
-          </Navbar>
+      <Page>
+        <Navbar title={title}>
+          <NavRight>
+            <Link popupClose>
+              <XMarkIcon className="w-8 h-8" />
+            </Link>
+          </NavRight>
+        </Navbar>
 
-          {appPopup && (
-            <>
-              {appPopup.note && <NotePopup />}
-              {appPopup.composeNote && <ComposeNotePopup />}
-              {appPopup && (
-                <>{appPopup.composeCommunity && <ComposeCommunityPopup />}</>
-              )}
-              {appPopup.community && <CommunityPopup />}
-              {/* {appPopup.article && <ArticlePopup />} */}
-              {appPopup.settings && <SettingsPopup />}
-              {appPopup.userList && <UserListPopup />}
-              {appPopup.tagList && <TagListPopup />}
-              {appPopup.listFeed && <ListFeedPopup />}
-            </>
-          )}
-        </Page>
-      </View>
+        {appPopup && (
+          <>
+            {appPopup.note && <NotePopup />}
+            {appPopup.composeNote && <ComposeNotePopup />}
+            {appPopup && (
+              <>{appPopup.composeCommunity && <ComposeCommunityPopup />}</>
+            )}
+            {appPopup.community && <CommunityPopup />}
+            {/* {appPopup.article && <ArticlePopup />} */}
+            {appPopup.settings && <SettingsPopup />}
+            {appPopup.userList && <UserListPopup />}
+            {appPopup.tagList && <TagListPopup />}
+            {appPopup.listFeed && <ListFeedPopup />}
+          </>
+        )}
+      </Page>
     </Popup>
   );
 }

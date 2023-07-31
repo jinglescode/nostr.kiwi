@@ -1,4 +1,3 @@
-import { Navbar, Page } from "framework7-react";
 import NoteBlock from "../NoteBlock";
 import { useNoteReplies } from "@/libs/ndk/hooks/useNoteReplies";
 import { useNote } from "@/libs/ndk/hooks/useNote";
@@ -26,10 +25,9 @@ export default function NotePage({ note, id }: { note?: TNote; id?: string }) {
   if (note === undefined) return <></>;
 
   return (
-    <Page>
-      {/* <Navbar title="Note" backLink="Back"></Navbar> */}
+    <>
       <NoteBlock note={note} canReply={true} />
       <NoteReplies replies={data} />
-    </Page>
+    </>
   );
 }

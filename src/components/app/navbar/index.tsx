@@ -117,7 +117,7 @@ export default function SiteNavbar() {
   }
 
   return (
-    <Navbar>
+    <Navbar hidden={false}>
       <NavLeft>
         <LeftNavButton />
       </NavLeft>

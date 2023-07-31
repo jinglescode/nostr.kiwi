@@ -1,6 +1,5 @@
 import { useCommunity } from "@/libs/ndk/hooks/useCommunity";
 import { useSessionStore } from "@/libs/zustand/session";
-// import ChatPage from "@/components/ui/chat/ChatPage";
 import CommunityApproveNotesPage from "./approveNotes";
 import CommunityArticlesPage from "./articles";
 import CommunityFeedsPage from "./feeds";

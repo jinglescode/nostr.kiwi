@@ -4,13 +4,12 @@ import { LoginScreen } from "./enumLoginScreen";
 import LoginWithSecret from "./LoginWithSecret";
 import LoginWithNip07 from "./LoginWithNip07";
 import LoginWithNip46 from "./LoginWithNip46";
-import { Page } from "framework7-react";
 
 export default function LoginPage() {
   const [showMenu, setShowMenu] = useState<LoginScreen>(LoginScreen.Main);
 
   return (
-    <Page>
+    <>
       <style jsx>{`
         .fadeOut {
           opacity: 0;
@@ -56,6 +55,6 @@ export default function LoginPage() {
           <LoginWithNip46 setShowMenu={setShowMenu} />
         </div>
       </div>
-    </Page>
+    </>
   );
 }

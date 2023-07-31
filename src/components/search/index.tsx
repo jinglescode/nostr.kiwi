@@ -15,6 +15,10 @@ import { TCommunity } from "@/types/Community";
 import { nip19 } from "nostr-tools";
 import { wineSearch } from "@/libs/api.nostr.wine/wineSearch";
 import NoteBlock from "../note/NoteBlock";
+import { useFeedTags } from "@/libs/ndk/hooks/useFeedTags";
+import { NDKFilter } from "@nostr-dev-kit/ndk";
+import { fetchNotes } from "@/libs/kiwi/nostr/fetchNotes";
+import { useNDK } from "@/libs/ndk";
 
 let timeout: any;
 
@@ -32,6 +36,8 @@ enum View {
 }
 
 export default function SearchPage() {
+  const { ndk, fetchEventsEOSE } = useNDK();
+
   const text = useRef<string>("");
   const searchResults = useRef<SearchResult[]>([]);
   const [inputSearch, setInputSearch] = useState<string>("");
@@ -147,6 +153,19 @@ export default function SearchPage() {
   }
 
   // notes
+
+  const {
+    isFetching: fetchingTags,
+    data: feedTags,
+    status: statusTags,
+  } = useFeedTags(
+    searchTerm.charAt(0) == "#" && !searchTerm.includes(" ")
+      ? [searchTerm.substring(1)]
+      : undefined,
+    searchTerm.substring(1),
+    false
+  );
+
   async function searchNotes() {
     if (searchTerm.includes("note1")) {
       let eventId = nip19.decode(searchTerm).data as
@@ -157,6 +176,22 @@ export default function SearchPage() {
         ...searchResults.current,
         { type: "note", id: eventId },
       ];
+    } else if (searchTerm.charAt(0) == "#" && !searchTerm.includes(" ")) {
+      const filter: NDKFilter = {
+        kinds: [1],
+        "#t": [searchTerm.substring(1)],
+      };
+
+      let notes = await fetchNotes({
+        fetchEvents: fetchEventsEOSE,
+        filter: filter,
+        removeReplies: true,
+        removeManyTags: 0,
+      });
+
+      const _results = notes.map((r) => ({ type: "note", id: r.id }));
+      //@ts-ignore
+      searchResults.current = [...searchResults.current, ..._results];
     } else {
       const resWineSearch = (await wineSearch(searchTerm)) as
         | { id: string }[]
@@ -247,7 +282,7 @@ export default function SearchPage() {
         <div>
           <InputSearch
             label="Search"
-            placeholder="Search communities, users and hashtags"
+            placeholder="Search users, tags and communities"
             onChange={onInputChange}
             value={inputSearch}
             onValueClear={() => {
@@ -303,7 +338,7 @@ export default function SearchPage() {
         )}
 
         <Virtuoso
-          className="mb-20 overflow-x-hidden"
+          className="overflow-x-hidden"
           style={{ height: "100%" }}
           data={results}
           itemContent={(index, note) => rowRenderer({ index, result: note })}

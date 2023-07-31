@@ -35,10 +35,11 @@ export default function AppInit({
   }, []);
 
   return (
-    <Providers>
-      <>
-        {clientActive && (
+    <>
+      {clientActive && (
+        <Providers>
           <App
+            name="Kiwi"
             routes={routes}
             url={url}
             colors={{
@@ -53,30 +54,30 @@ export default function AppInit({
             touch={{ tapHold: true }}
             theme="ios"
           >
-            {/* {isF7ready && (
-              <> */}
-            <View
-              main
-              iosDynamicNavbar={true}
-              xhrCache={false}
-              // browserHistory
-              // browserHistorySeparator=""
-              // browserHistoryInitialMatch={true}
-              // browserHistoryStoreHistory={false}
-              // url="/for-you"
-            >
-              {children}
-            </View>
+            {isF7ready && (
+              <>
+                <View
+                  main
+                  iosDynamicNavbar={false}
+                  // xhrCache={false}
+                  // browserHistory
+                  // browserHistorySeparator=""
+                  // browserHistoryInitialMatch={true}
+                  // browserHistoryStoreHistory={false}
+                  // url="/for-you"
+                >
+                  {children}
+                </View>
 
-            <AppActionSheet />
-            <AppToast />
-            <AppPopup />
-            <AppDialog />
-            {/* </>
-            )} */}
+                <AppActionSheet />
+                <AppToast />
+                <AppPopup />
+                <AppDialog />
+              </>
+            )}
           </App>
-        )}
-      </>
-    </Providers>
+        </Providers>
+      )}
+    </>
   );
 }

@@ -88,14 +88,14 @@ export default function AppActionsCommunity() {
                 : "See all notes"}
             </ActionsButton>
 
-            <ActionsButton
+            {/* <ActionsButton
               onClick={() => {
                 refetch();
                 setAppActionSheet(undefined);
               }}
             >
               Refetch Latest Feed
-            </ActionsButton>
+            </ActionsButton> */}
           </ActionsGroup>
 
           {isAuthor && (

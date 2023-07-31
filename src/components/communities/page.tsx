@@ -1,4 +1,3 @@
-import { Page } from "framework7-react";
 import { usePersistUserStore } from "@/libs/zustand/persistUserStore";
 import { useState } from "react";
 import InputSearch from "../common/form/InputSearch";
@@ -10,7 +9,7 @@ export default function CommunitiesPage() {
   const user = usePersistUserStore((state) => state.user);
 
   return (
-    <Page>
+    <>
       <div className="h-full flex flex-col">
         <div>
           <InputSearch
@@ -26,6 +25,6 @@ export default function CommunitiesPage() {
 
         <CommunitiesList inputSearch={inputSearch} pk={user?.pk} />
       </div>
-    </Page>
+    </>
   );
 }

@@ -92,7 +92,7 @@ export default function CommunityPage({ id }: { id: string }) {
                 Approve
               </Button>
             )}
-            {/* {articles && articles.length > 0 && (
+            {articles && articles.length > 0 && (
               <Button
                 smallMd
                 active={communityView == "articles"}
@@ -100,7 +100,7 @@ export default function CommunityPage({ id }: { id: string }) {
               >
                 Articles
               </Button>
-            )} */}
+            )}
             <Button
               smallMd
               active={communityView == "chat"}

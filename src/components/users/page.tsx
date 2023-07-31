@@ -23,39 +23,41 @@ export default function UsersPage({ pk }: { pk: string }) {
   const setViewUsers = usePersistUIStore((state) => state.setViewUsers);
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="grid grid-cols-4 grid-gap p-1 m-2">
-        <Button
-          active={viewUsers == UsersViews.feed}
-          onClick={() => setViewUsers(UsersViews.feed)}
-        >
-          <Icon f7="doc_append" md="article" />
-        </Button>
-        <Button
-          active={viewUsers == UsersViews.communities}
-          onClick={() => setViewUsers(UsersViews.communities)}
-        >
-          <Icon f7="person_3" md="group" />
-        </Button>
-        <Button
-          active={viewUsers == UsersViews.lists}
-          onClick={() => setViewUsers(UsersViews.lists)}
-        >
-          <Icon f7="list_dash" md="list" />
-        </Button>
-        <Button
-          active={viewUsers == UsersViews.info}
-          onClick={() => setViewUsers(UsersViews.info)}
-        >
-          <Icon f7="person" md="person" />
-        </Button>
-      </div>
+    <Page>
+      <div className="h-full flex flex-col">
+        <div className="grid grid-cols-4 grid-gap p-1 m-2">
+          <Button
+            active={viewUsers == UsersViews.feed}
+            onClick={() => setViewUsers(UsersViews.feed)}
+          >
+            <Icon f7="doc_append" md="article" />
+          </Button>
+          <Button
+            active={viewUsers == UsersViews.communities}
+            onClick={() => setViewUsers(UsersViews.communities)}
+          >
+            <Icon f7="person_3" md="group" />
+          </Button>
+          <Button
+            active={viewUsers == UsersViews.lists}
+            onClick={() => setViewUsers(UsersViews.lists)}
+          >
+            <Icon f7="list_dash" md="list" />
+          </Button>
+          <Button
+            active={viewUsers == UsersViews.info}
+            onClick={() => setViewUsers(UsersViews.info)}
+          >
+            <Icon f7="person" md="person" />
+          </Button>
+        </div>
 
-      {viewUsers === UsersViews.feed && <UserFeed npubOrPk={pk} />}
-      {viewUsers === UsersViews.info && user && <UserInfo user={user} />}
-      {viewUsers === UsersViews.lists && <ListsPage pk={pk} />}
-      {viewUsers === UsersViews.communities && <UserCommunities pk={pk} />}
-    </div>
+        {viewUsers === UsersViews.feed && <UserFeed npubOrPk={pk} />}
+        {viewUsers === UsersViews.info && user && <UserInfo user={user} />}
+        {viewUsers === UsersViews.lists && <ListsPage pk={pk} />}
+        {viewUsers === UsersViews.communities && <UserCommunities pk={pk} />}
+      </div>
+    </Page>
   );
 }
 

@@ -85,6 +85,9 @@ export default function NoteEditor() {
   }
 
   async function postNote() {
+
+    setAppPopup(undefined);
+    return null;
     let _inputNoteBody = inputNoteBody.trim();
 
     if (_inputNoteBody.length === 0) return;

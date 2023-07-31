@@ -23,8 +23,8 @@ export default function UserFeed({ npubOrPk }: { npubOrPk: string }) {
   if (user === undefined) return <></>;
 
   return (
-    <Page ptr onPtrRefresh={ptrRerefresh}>
+    // <Page ptr onPtrRefresh={ptrRerefresh}>
       <FeedLayout feed={feed} isFetching={isFetching} refetch={refetch} />
-    </Page>
+    // </Page>
   );
 }
