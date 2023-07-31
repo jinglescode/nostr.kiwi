@@ -42,12 +42,14 @@ export default function CommunitiesFollowing() {
   }
 
   return (
-    <Page ptr onPtrRefresh={ptrRerefresh}>
+    // <Page ptr onPtrRefresh={ptrRerefresh}>
+    <>
       <FeedLayout
         feed={data}
         isFetching={isFetching}
         noteView={FeedViews.communities}
       />
-    </Page>
+    </>
+    // </Page>
   );
 }

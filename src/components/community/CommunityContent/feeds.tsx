@@ -34,7 +34,8 @@ export default function CommunityFeedsPage({
   }
 
   return (
-    <Page ptr onPtrRefresh={ptrRerefresh}>
+    // <Page ptr onPtrRefresh={ptrRerefresh}>
+    <>
       {/* <Block>
         <div className="flex w-full">
           <div className="flex-1 overflow-hidden mr-2">
@@ -48,6 +49,7 @@ export default function CommunityFeedsPage({
       </Block> */}
       <FeedLayout feed={feed} isFetching={isFetching} refetch={refetch} />
       <NoteComposeFab community={community} />
-    </Page>
+    </>
+    // </Page>
   );
 }

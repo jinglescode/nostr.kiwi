@@ -30,8 +30,10 @@ export default function UsersFollowing() {
   }
 
   return (
-    <Page ptr onPtrRefresh={ptrRerefresh}>
+    // <Page ptr onPtrRefresh={ptrRerefresh}>
+    <>
       <FeedLayout feed={data} isFetching={isFetching} refetch={refetch} />
-    </Page>
+    </>
+    // </Page>
   );
 }
