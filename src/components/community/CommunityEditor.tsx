@@ -317,7 +317,7 @@ export default function CommunityEditor() {
           info={editingCommunityInfo ? "This cannot be changed" : ""}
         />
 
-        <Button onClick={() => handleButtonClicked()}>
+        <Button fill onClick={() => handleButtonClicked()}>
           {editingCommunityInfo ? "Update info" : "Create community"}
         </Button>
       </List>

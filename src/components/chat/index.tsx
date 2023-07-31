@@ -136,15 +136,16 @@ export default function Chat({ community }: { community: TCommunity }) {
         ))}
       </Messages>
 
-      <Messagebar
-        className="pb-4"
-        placeholder="your message"
-        // attachmentsVisible={attachmentsVisible()}
-        // sheetVisible={sheetVisible}
-        value={messageText}
-        onInput={(e) => setMessageText(e.target.value)}
-      >
-        {/* <Link
+      {signer && (
+        <Messagebar
+          className="pb-4"
+          placeholder="your message"
+          // attachmentsVisible={attachmentsVisible()}
+          // sheetVisible={sheetVisible}
+          value={messageText}
+          onInput={(e) => setMessageText(e.target.value)}
+        >
+          {/* <Link
         iconIos="f7:camera_fill"
         iconMd="material:camera_alt"
         slot="inner-start"
@@ -152,13 +153,13 @@ export default function Chat({ community }: { community: TCommunity }) {
           setSheetVisible(!sheetVisible);
         }}
       /> */}
-        <Link
-          iconIos="f7:arrow_up_circle_fill"
-          iconMd="material:send"
-          slot="inner-end"
-          onClick={sendMessage}
-        />
-        {/* <MessagebarAttachments>
+          <Link
+            iconIos="f7:arrow_up_circle_fill"
+            iconMd="material:send"
+            slot="inner-end"
+            onClick={sendMessage}
+          />
+          {/* <MessagebarAttachments>
         {attachments.map((image, index) => (
           <MessagebarAttachment
             key={index}
@@ -177,7 +178,8 @@ export default function Chat({ community }: { community: TCommunity }) {
           />
         ))}
       </MessagebarSheet> */}
-      </Messagebar>
+        </Messagebar>
+      )}
     </Page>
   );
 }
