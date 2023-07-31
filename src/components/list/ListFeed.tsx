@@ -18,7 +18,7 @@ export default function ListFeed({ list }: { list: TUserList | TTagList }) {
     isFetching: fetchingTags,
     data: feedTags,
     status: statusTags,
-  } = useFeedTags(tags, `list::${list.id}`);
+  } = useFeedTags(tags, `list::${list.id}`, false);
 
   if (list === undefined) return <></>;
 
