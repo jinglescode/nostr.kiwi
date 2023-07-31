@@ -67,11 +67,12 @@ export default function AppInit({
                   // url="/for-you"
                 >
                   {children}
+                  <AppPopup />
                 </View>
 
                 <AppActionSheet />
                 <AppToast />
-                <AppPopup />
+                
                 <AppDialog />
               </>
             )}

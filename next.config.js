@@ -7,6 +7,5 @@
 // module.exports = withPWA({ reactStrictMode: true });
 
 const nextConfig = {
-  reactStrictMode: true,
 };
 module.exports = nextConfig;

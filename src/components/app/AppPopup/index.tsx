@@ -18,7 +18,6 @@ import UserListPopup from "./userList";
 import TagListPopup from "./tagList";
 import ListFeedPopup from "./listFeed";
 import NotePopup from "./note";
-import { useEffect } from "react";
 
 export default function AppPopup() {
   const appPopup = useSessionStore((state) => state.appPopup);
@@ -42,21 +41,11 @@ export default function AppPopup() {
   if (appPopup?.tagList) title = "Tags List";
   if (appPopup?.listFeed) title = `${appPopup.listFeed.id}`;
 
-  useEffect(() => {
-    if (appPopup === undefined) {
-      f7.popup.close(".app-popup");
-    }
-  }, [appPopup]);
-
-  console.log('appPopup', appPopup)
-
   return (
     <Popup
-      className="app-popup"
-      push={appPopup?.composeNote ? true : false}
       opened={appPopup !== undefined}
       onPopupClosed={() => setAppPopup(undefined)}
-      closeByBackdropClick
+      swipeToClose
     >
       <Page>
         <Navbar title={title}>
