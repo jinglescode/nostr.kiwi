@@ -1,3 +1,4 @@
+import { PropsWithChildren, createContext, useContext } from "react";
 import NDK, {
   NDKEvent,
   NDKFilter,
@@ -5,11 +6,8 @@ import NDK, {
   NDKNip46Signer,
   NDKPrivateKeySigner,
 } from "@nostr-dev-kit/ndk";
-import { PropsWithChildren, createContext, useContext } from "react";
 import NDKInstance from "./instance";
 import { _loginWithNip07, _loginWithNip46, _loginWithSecret } from "./signers";
-import { Block, Preloader, Page } from "framework7-react";
-import Loader from "@/components/common/loader";
 
 interface NDKContext {
   ndk: NDK | undefined;
@@ -80,7 +78,8 @@ const NDKProvider = ({
   } = NDKInstance(relayUrls);
 
   async function loginWithNip46(npub: string, sk?: string) {
-    const res = await _loginWithNip46(ndk!, npub, sk);
+    if (ndk === undefined) return undefined;
+    const res = await _loginWithNip46(ndk, npub, sk);
     if (res) {
       await setSigner(res.remoteSigner);
       return res;
@@ -88,7 +87,7 @@ const NDKProvider = ({
   }
 
   async function loginWithSecret(skOrNsec: string) {
-    const res = await _loginWithSecret(ndk!, skOrNsec);
+    const res = await _loginWithSecret(skOrNsec);
     if (res) {
       const { signer } = res;
       await setSigner(signer);
@@ -97,7 +96,7 @@ const NDKProvider = ({
   }
 
   async function loginWithNip07() {
-    const res = await _loginWithNip07(ndk!);
+    const res = await _loginWithNip07();
     if (res) {
       const { signer } = res;
       await setSigner(signer);
@@ -105,26 +104,6 @@ const NDKProvider = ({
     }
   }
 
-  // if (ndk !== undefined) {
-  //   return (
-  //     <NDKContext.Provider
-  //       value={{
-  //         ndk: ndk,
-  //         signer,
-  //         fetchEvents,
-  //         fetchEventsEOSE,
-  //         loginWithNip07,
-  //         loginWithNip46,
-  //         loginWithSecret,
-  //         signPublishEvent,
-  //       }}
-  //     >
-  //       {children}
-  //     </NDKContext.Provider>
-  //   );
-  // } else {
-  //   return <Loader label="Connecting to relays..." />;
-  // }
   return (
     <NDKContext.Provider
       value={{

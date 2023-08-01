@@ -3,13 +3,18 @@ import { useNotePost } from "@/libs/ndk/hooks/useNotePost";
 import { useSessionStore } from "@/libs/zustand/session";
 import { useSessionNoteStore } from "@/libs/zustand/sessionNoteStore";
 import { TImageUpload } from "@/types/Note";
-import { Block, Button, Page } from "framework7-react";
+import { Block, Button } from "framework7-react";
 import { useEffect, useRef, useState } from "react";
 import { nip19 } from "nostr-tools";
 import { NDKEvent } from "@nostr-dev-kit/ndk";
 import { getTagsFromContent } from "@/libs/ndk/utils/note";
+import { CameraIcon, GifIcon } from "@heroicons/react/24/solid";
+import GifSearch from "./GifSearch";
+import ImageUploader from "./ImageUploader";
 
 export default function NoteEditor() {
+  const inputFile = useRef(null);
+
   const noteEditorMetadata = useSessionNoteStore(
     (state) => state.noteEditorMetadata
   );
@@ -42,8 +47,6 @@ export default function NoteEditor() {
   const [inputNoteBody, setInputNoteBody] = useState<string>("");
   const [suggestionModalOpened, setSuggestionModalOpened] =
     useState<boolean>(false);
-
-  const inputFile = useRef(null);
 
   const community = noteEditorMetadata?.community;
   const replyNote = noteEditorMetadata?.replyNote;
@@ -209,14 +212,6 @@ export default function NoteEditor() {
   return (
     <>
       <div className="flex flex-col">
-        {/* <TextEditor
-        placeholder="what do you want to say?"
-        resizable
-        buttons={[]}
-        value={inputNoteBody}
-        onTextEditorChange={(value) => setInputNoteBody(value)}
-      /> */}
-
         <div className="w-full dark:border-gray-600 p-4 flex-1">
           <textarea
             rows={15}
@@ -226,22 +221,35 @@ export default function NoteEditor() {
             onChange={(e) => setInputNoteBody(e.target.value)}
           ></textarea>
         </div>
-        {/* <List>
-        <ListInput
-          placeholder="what do you want to say?"
-          resizable
-          value={inputNoteBody}
-          onChange={(e) => setInputNoteBody(e.target.value)}
-          outline
-          size={20}
-        />
-      </List> */}
+
+        <div className="mx-4 flex gap-2">
+          {/* @ts-ignore */}
+          <Button fill onClick={() => inputFile.current.click()}>
+            <CameraIcon className={`w-4 h-4 mr-1`} />
+          </Button>
+          <Button fill onClick={() => setGifSearchOpened(true)}>
+            <GifIcon className={`w-4 h-4 mr-1`} />
+          </Button>
+        </div>
         <Block>
           <Button fill onClick={() => postNote()}>
             POST{community && " TO " + community.name}
           </Button>
         </Block>
       </div>
+
+      <GifSearch
+        gifSearchOpened={gifSearchOpened}
+        setGifSearchOpened={setGifSearchOpened}
+        appendText={appendText}
+      />
+
+      <ImageUploader
+        inputFile={inputFile}
+        listOfUploadedImages={listOfUploadedImages}
+        setlistOfUploadedImages={setlistOfUploadedImages}
+        appendText={appendText}
+      />
     </>
   );
 }

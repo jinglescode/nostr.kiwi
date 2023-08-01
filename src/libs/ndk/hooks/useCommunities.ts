@@ -54,10 +54,6 @@ export function useCommunities() {
     },
     {
       enabled: !!ndk,
-      // refetchOnWindowFocus: false,
-      // refetchOnMount: false,
-      // refetchOnReconnect: false,
-      // cacheTime: 1000 * 60 * 60 * 24 * 7,
       staleTime: STALETIME.info,
     }
   );

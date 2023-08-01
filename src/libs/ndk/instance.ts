@@ -50,8 +50,6 @@ export default function NDKInstance(explicitRelayUrls: string[]) {
 
   async function fetchEvents(filter: NDKFilter): Promise<NDKEvent[]> {
     if (ndk === undefined) return [];
-
-    // this seems getting lesser events than it suppose to for feeds
     let events = Array.from(await ndk.fetchEvents(filter));
     return events;
   }
@@ -73,7 +71,6 @@ export default function NDKInstance(explicitRelayUrls: string[]) {
 
       relaySetSubscription.on("eose", () => {
         setTimeout(() => resolve(Array.from(new Set(events.values()))), 3000);
-        // resolve(Array.from(new Set(events.values())));
       });
     });
   }
@@ -81,16 +78,12 @@ export default function NDKInstance(explicitRelayUrls: string[]) {
   async function signPublishEvent(event: NDKEvent, repost: boolean = false) {
     if (ndk === undefined) return;
     event.ndk = ndk;
-
     if (repost) {
       await event.repost();
     } else {
       await event.sign();
       await event.publish();
     }
-
-    console.log(999999, event);
-
     return event;
   }
 

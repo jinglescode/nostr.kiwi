@@ -5,7 +5,7 @@ import NDK, {
 } from "@nostr-dev-kit/ndk";
 import { getPublicKey, nip19 } from "nostr-tools";
 
-export async function _loginWithSecret(ndk: NDK, skOrNsec: string) {
+export async function _loginWithSecret(skOrNsec: string) {
   try {
     let privkey = skOrNsec;
 
@@ -15,14 +15,15 @@ export async function _loginWithSecret(ndk: NDK, skOrNsec: string) {
 
     if (typeof getPublicKey(privkey) === "string") {
       const signer = new NDKPrivateKeySigner(privkey);
-
       return signer.user().then(async (user) => {
         if (user.npub) {
-          console.log(
-            `successful login with secret`,
-            (await signer.user()).npub
-          );
-          return { type: "sk", npub: user.npub, sk: privkey, signer: signer };
+          return {
+            type: "sk",
+            user: user,
+            npub: user.npub,
+            sk: privkey,
+            signer: signer,
+          };
         }
       });
     }
@@ -42,15 +43,10 @@ export async function _loginWithNip46(ndk: NDK, token: string, sk?: string) {
 
     return remoteSigner.user().then(async (user) => {
       if (user.npub) {
-        console.log(
-          `successful login with nip46`,
-          (await remoteSigner.user()).npub
-        );
-
         await remoteSigner.blockUntilReady();
-
         return {
           type: "nip46",
+          user: user,
           npub: (await remoteSigner.user()).npub,
           sk: localSigner.privateKey,
           token: token,
@@ -64,13 +60,12 @@ export async function _loginWithNip46(ndk: NDK, token: string, sk?: string) {
   }
 }
 
-export async function _loginWithNip07(ndk: NDK) {
+export async function _loginWithNip07() {
   try {
     const signer = new NDKNip07Signer();
     return signer.user().then(async (user) => {
       if (user.npub) {
-        console.log(`successful login with nip07`, (await signer.user()).npub);
-        return { type: "nip07", npub: user.npub, signer: signer };
+        return { type: "nip07", user: user, npub: user.npub, signer: signer };
       }
     });
   } catch (e) {
