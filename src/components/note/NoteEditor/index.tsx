@@ -109,7 +109,7 @@ export default function NoteEditor() {
         imageTags.push("imeta");
 
         for (let key in image) {
-          //@ts-ignore
+          //@ts-ignore"e"
           const value = image[key];
           if (value.length > 0) {
             imageTags.push(`${key} ${value}`);
@@ -126,6 +126,7 @@ export default function NoteEditor() {
     }
 
     // reply
+    console.log("replyNote", replyNote);
     if (replyNote) {
       // tag the author tag
       note.tags.push(["p", replyNote.authorPk]);
@@ -175,7 +176,10 @@ export default function NoteEditor() {
       }
     }
 
-    const moreTags = getTagsFromContent(note.content);
+    let moreTags: string[][] = [];
+    if (!quoteNote) {
+      moreTags = getTagsFromContent(note.content);
+    }
     note.tags = [...note.tags, ...moreTags];
 
     console.log("going to publish note", note);

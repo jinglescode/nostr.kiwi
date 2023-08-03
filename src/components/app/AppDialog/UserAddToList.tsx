@@ -48,7 +48,7 @@ export default function UserAddToListDialog() {
   }
 
   async function addUserToList(selectedList: string) {
-    if (appDialog?.userAddToList === undefined) return;
+    if (appDialog?.userAddToList === undefined || user === undefined) return;
 
     setLoading(true);
 
@@ -56,6 +56,7 @@ export default function UserAddToListDialog() {
       id: inputNewList,
       items: [appDialog.userAddToList],
       type: "user",
+      pk: user.pk,
     };
 
     if (selectedList.length > 0) {

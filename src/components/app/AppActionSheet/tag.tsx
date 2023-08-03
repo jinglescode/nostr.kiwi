@@ -29,6 +29,7 @@ export default function AppActionsTag() {
                 id: tag,
                 items: [tag],
                 type: 'tag',
+                pk: '',
               }});
               setAppActionSheet(undefined);
             }}

@@ -1,4 +1,6 @@
 import CommunityRepostDialog from "./CommunityRepost";
+import ListForkDialog from "./ListFork";
+import ListNewUserListDialog from "./ListNewUserList";
 import NoteReactionDialog from "./NoteReaction";
 import TagAddToListDialog from "./TagAddToList";
 import UserAddToListDialog from "./UserAddToList";
@@ -16,6 +18,8 @@ export default function AppDialog() {
       <ZapCustomNWCDialog />
       <UserAddToListDialog />
       <TagAddToListDialog />
+      <ListForkDialog />
+      <ListNewUserListDialog />
     </>
   );
 }

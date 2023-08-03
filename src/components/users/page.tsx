@@ -1,9 +1,6 @@
 import {
   Block,
-  Navbar,
   Page,
-  Segmented,
-  Subnavbar,
   Button,
   Icon,
 } from "framework7-react";
@@ -15,12 +12,14 @@ import UserImage from "../user/UserImage";
 import { TUser } from "@/types/User";
 import ListsPage from "../list/ListPage";
 import UserCommunities from "../user/UserCommunities";
+import { useState } from "react";
 
 export default function UsersPage({ pk }: { pk: string }) {
   const { data: user } = useUserProfile(pk);
 
-  const viewUsers = usePersistUIStore((state) => state.viewUsers);
-  const setViewUsers = usePersistUIStore((state) => state.setViewUsers);
+  // const viewUsers = usePersistUIStore((state) => state.viewUsers);
+  // const setViewUsers = usePersistUIStore((state) => state.setViewUsers);
+  const [viewUsers, setViewUsers] = useState<UsersViews>(UsersViews.feed);
 
   return (
     <Page>

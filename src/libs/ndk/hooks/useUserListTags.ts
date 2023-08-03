@@ -26,7 +26,7 @@ export function useUserListTags(pubkey: string | undefined) {
           continue;
 
         const id = dTags[0][1];
-        _lists[id] = { id, items: tTags, type: "tag" };
+        _lists[id] = { id, items: tTags, type: "tag", pk: e.pubkey };
       }
 
       return _lists;

@@ -48,7 +48,7 @@ export default function TagAddToListDialog() {
   }
 
   async function addTagToList(selectedList: string) {
-    if (appDialog?.tagAddToList === undefined) return;
+    if (appDialog?.tagAddToList === undefined || user === undefined) return;
 
     setLoading(true);
 
@@ -56,6 +56,7 @@ export default function TagAddToListDialog() {
       id: inputNewList,
       items: [appDialog.tagAddToList],
       type: "tag",
+      pk: user.pk,
     };
 
     if (selectedList.length > 0) {

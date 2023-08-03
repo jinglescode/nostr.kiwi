@@ -10,7 +10,7 @@ export default function UserListPopup() {
 
   return (
     <>
-      <ListUsers id={userList} />
+      <ListUsers list={userList} />
     </>
   );
 }

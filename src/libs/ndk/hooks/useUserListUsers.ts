@@ -1,6 +1,6 @@
 import { STALETIME } from "@/constants/nostr";
+import eventToListUser from "@/libs/kiwi/nostr/eventToListUser";
 import { useNDK } from "@/libs/ndk";
-import { TUserList } from "@/types/List";
 import { NDKFilter } from "@nostr-dev-kit/ndk";
 import { useQuery } from "@tanstack/react-query";
 
@@ -17,21 +17,9 @@ export function useUserListUsers(pubkey: string | undefined) {
       let events = Array.from(await fetchEvents(filter));
       console.log(9999, "useUserLists", events.length, events);
 
-      let _lists: { [id: string]: TUserList } = {};
-      for (let e of events) {
-        const dTags = e.tags.filter((t) => t[0] === "d");
-        const pTags = e.tags.filter((t) => t[0] === "p").map((t) => t[1]);
+      const list = eventToListUser(events);
 
-        if (dTags.length === 0 || dTags.length > 1 || pTags.length === 0)
-          continue;
-
-        const id = dTags[0][1];
-        if (id != "mute") {
-          _lists[id] = { id, items: pTags, type: "user" };
-        }
-      }
-
-      return _lists;
+      return list;
     },
     {
       enabled: !!pubkey && !!ndk,

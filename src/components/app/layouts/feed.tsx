@@ -92,10 +92,6 @@ export default function FeedLayout({
       </div> */}
 
       {isFetching && displayFeed.length == 0 && (
-        // <Fab
-        //   className="fixed left-4-safe bottom-20-safe z-20"
-        //   icon={<ArrowPathIcon className="w-7 h-7 animate-spin" />}
-        // />
         <Block className="text-center">
           <Preloader />
         </Block>
@@ -103,6 +99,7 @@ export default function FeedLayout({
 
       <Virtuoso
         style={{ height: "100%" }}
+        //@ts-ignore
         data={displayFeed}
         itemContent={(index, note) => rowRenderer({ index, note })}
       />

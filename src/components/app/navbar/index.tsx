@@ -101,7 +101,11 @@ export default function SiteNavbar() {
   }
 
   function LeftNavButton() {
-    return <img src="/images/logo/rounded-512.png" className="w-8 md:hidden" />;
+    return (
+      <Link href="/app/" external>
+        <img src="/images/logo/rounded-512.png" className="w-8 md:hidden" />
+      </Link>
+    );
   }
 
   function RightNavButton() {

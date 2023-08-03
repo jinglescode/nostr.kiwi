@@ -1,22 +1,19 @@
 import { useUserListTags } from "@/libs/ndk/hooks/useUserListTags";
 import { useUserListUsers } from "@/libs/ndk/hooks/useUserListUsers";
 import { TTagList, TUserList } from "@/types/List";
-import { Icon, List, ListItem } from "framework7-react";
+import { Icon, List, ListItem, f7 } from "framework7-react";
 import UserName from "../user/UserName";
-import { useSessionStore } from "@/libs/zustand/session";
 
 const LIMIT = 2;
 
 export default function ListsPage({ pk }: { pk: string }) {
-  const setAppPopup = useSessionStore((state) => state.setAppPopup);
-
   let lists: {
     [id: string]: TUserList | TTagList;
   } = {};
   const { data: listUsers } = useUserListUsers(pk);
-  const { data: listTags } = useUserListTags(pk);
+  // const { data: listTags } = useUserListTags(pk);
   if (listUsers) lists = { ...lists, ...listUsers };
-  if (listTags) lists = { ...lists, ...listTags };
+  // if (listTags) lists = { ...lists, ...listTags };
 
   return (
     <>
@@ -24,15 +21,12 @@ export default function ListsPage({ pk }: { pk: string }) {
         {lists &&
           Object.keys(lists).map((listName) => {
             const list = lists[listName];
-
             return (
               <ListItem
                 title={list.id}
-                onClick={() =>
-                  setAppPopup({
-                    listFeed: list,
-                  })
-                }
+                link={`/list/${list.id}/${list.pk}:${
+                  list.type == "user" ? "30000" : "30001"
+                }`}
               >
                 {list.type == "user" ? (
                   <Icon md="material:person" ios="f7:person" slot="media" />

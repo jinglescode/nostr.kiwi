@@ -34,7 +34,7 @@ export function useUserListUsersPost() {
     {
       onSettled: (res) => {
         if (res) {
-          queryClient.invalidateQueries(["user", res.event.pubkey, "lists"]);
+          queryClient.invalidateQueries(["user", res.event.pubkey, "lists", res.list.id]);
           queryClient.invalidateQueries(["feed", `list::${res.list.id}`]);
         }
       },

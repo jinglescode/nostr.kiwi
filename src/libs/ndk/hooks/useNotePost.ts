@@ -29,7 +29,6 @@ export function useNotePost() {
     {
       onSettled: (res) => {
         if (res) {
-          console.log(555, res);
           if (res.isCommunity) {
             queryClient.invalidateQueries(["feed", res.isCommunity, "all"]);
             queryClient.invalidateQueries(["feed", res.isCommunity, "mod"]);

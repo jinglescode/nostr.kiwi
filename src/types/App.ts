@@ -20,6 +20,8 @@ export type TAppDialog = {
   userAddToList?: string;
   tag?: string;
   tagAddToList?: string;
+  listUserFork?: TUserList;
+  newListAddUsers?: string[];
 };
 
 export type TPopup = {
@@ -36,7 +38,7 @@ export type TPopup = {
   community?: TCommunity;
   article?: TArticle;
   settings?: boolean;
-  userList?: string;
+  userList?: TUserList;
   tagList?: string;
   listFeed?: TUserList | TTagList;
 };
@@ -50,7 +52,7 @@ export type TActionSheet = {
   communityId?: string;
   foryou?: boolean;
   user?: boolean;
-  listUsers?: string;
+  listUsers?: TUserList;
   tag?: string;
   listTags?: string;
 };

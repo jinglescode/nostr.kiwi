@@ -7,6 +7,9 @@ import {
   Icon,
   Subnavbar,
   Segmented,
+  f7,
+  NavLeft,
+  Link,
 } from "framework7-react";
 import CommunityContent from "./CommunityContent";
 import { useCommunity } from "@/libs/ndk/hooks/useCommunity";
@@ -60,7 +63,18 @@ export default function CommunityPage({ id }: { id: string }) {
 
   return (
     <Page>
-      <Navbar backLink="Back">
+      <Navbar backLink={f7.view.main.history.length > 1 ? "Back" : false}>
+        {f7.view.main.history.length <= 1 && (
+          <NavLeft>
+            <Link href="/app/" external>
+              <img
+                src="/images/logo/rounded-512.png"
+                className="w-8 md:hidden"
+              />
+            </Link>
+          </NavLeft>
+        )}
+
         <NavTitle>
           <Title />
         </NavTitle>

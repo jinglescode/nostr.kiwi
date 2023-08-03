@@ -2,10 +2,13 @@ import { useCommunityFollowers } from "@/libs/ndk/hooks/useCommunityFollowers";
 import {
   Block,
   BlockTitle,
+  Link,
   List,
   ListItem,
+  NavLeft,
   Navbar,
   Page,
+  f7,
 } from "framework7-react";
 import CommunityCard from "./CommunityCard";
 import UserHeader from "../user/UserHeader";
@@ -26,7 +29,21 @@ export default function CommunityInfoPage({ id }: { id: string }) {
 
   return (
     <Page>
-      <Navbar backLink="Back" title={community.name}></Navbar>
+      <Navbar
+        backLink={f7.view.main.history.length > 1 ? "Back" : false}
+        title={community.name}
+      >
+        {f7.view.main.history.length <= 1 && (
+          <NavLeft>
+            <Link href="/app/" external>
+              <img
+                src="/images/logo/rounded-512.png"
+                className="w-8 md:hidden"
+              />
+            </Link>
+          </NavLeft>
+        )}
+      </Navbar>
       <CommunityCard community={community} style={4} />
 
       {community.description && (

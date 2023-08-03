@@ -1,11 +1,13 @@
 export type TUserList = {
   id: string;
   items: string[];
-  type: 'user',
+  type: "user";
+  pk: string;
 };
 
 export type TTagList = {
   id: string;
   items: string[];
-  type: 'tag',
+  type: "tag";
+  pk: string;
 };
