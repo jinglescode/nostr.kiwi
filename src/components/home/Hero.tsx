@@ -55,12 +55,12 @@ export function Hero() {
                 <span className="ml-2.5">Launch App</span>
               </Button>
               <Button
-                href="https://lnshort.it/hello-redditor/"
+                href="https://github.com/jinglescode/nostr.kiwi"
                 variant="outline"
                 newWindow={true}
               >
                 <BookOpenIcon className="h-6 w-6 flex-none" />
-                <span className="ml-2.5">Learn more</span>
+                <span className="ml-2.5">Source</span>
               </Button>
             </div>
           </div>
